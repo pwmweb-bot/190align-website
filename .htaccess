@@ -7,8 +7,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Redirect HTTP to HTTPS
+  # Redirect HTTP to HTTPS (check X-Forwarded-Proto for CDN/proxy environments)
   RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # Redirect www to non-www

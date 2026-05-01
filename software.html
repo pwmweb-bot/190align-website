@@ -15,6 +15,10 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://190align.com/software.html" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:image" content="https://190align.com/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://190align.com/assets/images/og-image.png" />
   <link rel="canonical" href="https://190align.com/software.html" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -35,34 +39,53 @@
 
   <!-- Schema.org -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "@id": "https://190align.com/software.html#software",
-      "name": "1:90 Align Platform",
-      "alternateName": ["1:90 Align Software","190 Align Business Operating System"],
-      "description": "A business operating system software platform that implements the 1:90 Align Framework. Connects daily tasks to 90-day strategic goals through Arc Planning, Wave Management, Milestone Tracking, Capacity Planning, and Daily Standup (Ripple) features.",
-      "url": "https://190align.com/software.html",
-      "applicationCategory": "ProductivityApplication",
-      "applicationSubCategory": "Strategic Planning Software",
-      "operatingSystem": "Web browser",
-      "featureList": ["Arc Planning","Wave Management","Milestone Tracking","Capacity Planner","Daily Standups (Ripples)","Executive Dashboard","Team Dashboard"],
-      "creator": { "@id": "https://190align.com/#organization" },
-      "provider": { "@id": "https://190align.com/#organization" },
-      "offers": { "@type": "Offer", "price": "Contact for pricing", "priceCurrency": "GBP" }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "1:90 Align Business Operating System",
-      "description": "Complete software platform for 90-day strategic planning and execution. Not a task list — a full operating system connecting every daily action to your 90-day Arc.",
-      "provider": { "@id": "https://190align.com/#organization" },
-      "serviceType": "Business Software Platform",
-      "url": "https://190align.com/software.html",
-      "areaServed": ["GB","US","CA","ZA","AU","NZ"]
-    }
-  ]
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://190align.com/software.html#webpage",
+        "url": "https://190align.com/software.html",
+        "name": "Business Operating System Software | Strategic Planning Platform | 1:90 Align",
+        "description": "The 1:90 Align platform connects daily work to 90-day strategic goals. Features: Arc planning, Wave management, Capacity Planner, Dashboards, Daily Standups, and Milestone Tracking.",
+        "isPartOf": { "@id": "https://190align.com/#website" },
+        "dateModified": "2026-05-01",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://190align.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Software", "item": "https://190align.com/software.html" }
+          ]
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://190align.com/software.html#software",
+        "name": "1:90 Align Platform",
+        "url": "https://190align.com/software.html",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "Strategic Planning Software",
+        "operatingSystem": "Web",
+        "description": "A business operating system that connects daily work to 90-day strategic goals through the Arc → Wave → Milestone → Task hierarchy. Features: visual Arc planning, Wave and Milestone management, team capacity planning, real-time dashboards, and daily Ripple standups.",
+        "featureList": [
+          "Arc Planning — visual 90-day strategic goal setting and tracking",
+          "Wave Management — three 30-day sprints with deliverables and checkpoints",
+          "Capacity Planner — team workload balancing and availability visibility",
+          "Real-time Dashboards — executive, team, and individual views",
+          "Daily Standups (Ripples) — 15-minute alignment meetings",
+          "Milestone Tracking — weekly wins and automated progress reporting"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://190align.com/software.html",
+          "priceCurrency": "GBP",
+          "description": "Request a demo to discuss pricing and implementation",
+          "seller": { "@id": "https://190align.com/#organization" }
+        },
+        "provider": { "@id": "https://190align.com/#organization" }
+      }
+    ]
+  }
   </script>
 </head>
 <body class="bg-white">
@@ -225,6 +248,113 @@
               <h3 class="text-xl font-black text-blue-950 uppercase tracking-wider">Milestone Tracking</h3>
             </div>
             <p class="text-lg font-bold text-gray-700">Weekly wins. Automated progress. Celebrate or identify risks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────────── -->
+  <section class="py-32 bg-blue-950 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-5xl md:text-6xl font-black leading-none mb-4">HOW IT WORKS</h2>
+        <p class="text-xl font-bold text-gray-300 mb-16 max-w-3xl">The 1:90 Align platform enforces the framework architecture. Every task must connect to a milestone. Every milestone must connect to a wave. Every wave must connect to the active Arc. The system makes misalignment structurally impossible.</p>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+          <div class="space-y-8">
+            <div class="border-l-4 border-orange-500 pl-8">
+              <h3 class="text-2xl font-black mb-3">Step 1 — Define Your Arc</h3>
+              <p class="text-lg font-bold text-gray-300">An Arc Leader uses the Arc Planning module to define the single 90-day strategic goal. Not a list of priorities — one Arc. The platform prompts for success criteria, resource requirements, and the three-Wave breakdown before the Arc is published to the organisation.</p>
+            </div>
+            <div class="border-l-4 border-orange-500 pl-8">
+              <h3 class="text-2xl font-black mb-3">Step 2 — Build Your Waves</h3>
+              <p class="text-lg font-bold text-gray-300">Each Arc automatically generates three Wave slots (Foundation, Build, Complete). Team Leaders add Milestones within each Wave — the weekly measurable checkpoints that prove the Wave is on track. Milestones are binary: achieved or not. No ambiguous percentage-complete scores.</p>
+            </div>
+          </div>
+          <div class="space-y-8">
+            <div class="border-l-4 border-orange-500 pl-8">
+              <h3 class="text-2xl font-black mb-3">Step 3 — Assign Tasks</h3>
+              <p class="text-lg font-bold text-gray-300">Workers receive daily tasks through the platform, each linked to a specific Milestone. Tasks cannot exist without a Milestone connection — this is enforced by the system, not by policy. The Capacity Planner ensures workload is balanced across the team before tasks are assigned.</p>
+            </div>
+            <div class="border-l-4 border-orange-500 pl-8">
+              <h3 class="text-2xl font-black mb-3">Step 4 — Run Daily Ripples</h3>
+              <p class="text-lg font-bold text-gray-300">Each morning, the platform surfaces the day's Ripple agenda automatically — tasks completed, tasks planned, blockers flagged. The 15-minute standup runs against the Arc, not a general task list. Every question asked in a Ripple connects back to the 90-day goal.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-900 border-4 border-orange-500 p-8 md:p-12">
+          <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div>
+              <p class="text-5xl font-black text-orange-500 mb-2">4</p>
+              <p class="text-lg font-black uppercase">Framework Levels</p>
+              <p class="text-sm font-bold text-gray-400 mt-1">Arc → Wave → Milestone → Task</p>
+            </div>
+            <div>
+              <p class="text-5xl font-black text-orange-500 mb-2">3</p>
+              <p class="text-lg font-black uppercase">Waves Per Arc</p>
+              <p class="text-sm font-bold text-gray-400 mt-1">Foundation, Build, Complete</p>
+            </div>
+            <div>
+              <p class="text-5xl font-black text-orange-500 mb-2">90</p>
+              <p class="text-lg font-black uppercase">Day Execution Cycle</p>
+              <p class="text-sm font-bold text-gray-400 mt-1">The optimal strategic unit</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY NOT JUST USE ASANA / JIRA ───────────────────── -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-5xl md:text-6xl font-black leading-none mb-4 text-blue-950">NOT ASANA. NOT JIRA.<br /><span class="text-orange-500">AN OPERATING SYSTEM.</span></h2>
+        <p class="text-xl font-bold text-gray-600 mb-16 max-w-3xl">Existing project management tools solve the wrong problem. They help you organise what you're already doing — without questioning whether what you're doing connects to anything strategic.</p>
+        <div class="grid md:grid-cols-2 gap-0">
+          <div class="border-4 border-blue-950 p-8 bg-gray-100">
+            <h3 class="text-2xl font-black uppercase mb-6 text-gray-500">Other Tools</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-black mt-1 text-xl">✗</span>
+                <span class="font-bold text-gray-600">Tasks exist without strategic context</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-black mt-1 text-xl">✗</span>
+                <span class="font-bold text-gray-600">No connection between daily work and quarterly goals</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-black mt-1 text-xl">✗</span>
+                <span class="font-bold text-gray-600">Executives can't see execution-level progress</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-black mt-1 text-xl">✗</span>
+                <span class="font-bold text-gray-600">Strategy drift goes undetected until quarter-end</span>
+              </li>
+            </ul>
+          </div>
+          <div class="border-4 border-l-0 border-blue-950 p-8 bg-blue-950 text-white">
+            <h3 class="text-2xl font-black uppercase mb-6 text-orange-500">1:90 Align</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <span class="text-orange-500 font-black mt-1 text-xl">✓</span>
+                <span class="font-bold">Every task is structurally linked to a Milestone and Arc</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-orange-500 font-black mt-1 text-xl">✓</span>
+                <span class="font-bold">Four-level hierarchy creates unbroken line of sight</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-orange-500 font-black mt-1 text-xl">✓</span>
+                <span class="font-bold">Executive, team, and individual dashboards in one platform</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-orange-500 font-black mt-1 text-xl">✓</span>
+                <span class="font-bold">Daily Ripples catch drift in real time, not at quarter-end</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

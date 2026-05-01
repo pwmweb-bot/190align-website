@@ -12,6 +12,11 @@
   <meta property="og:title" content="About 1:90 Align | UK Business Consultants" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://190align.com/about.html" />
+  <meta property="og:image" content="https://190align.com/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://190align.com/assets/images/og-image.png" />
   <link rel="canonical" href="https://190align.com/about.html" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-280WMHP1LQ"></script>
@@ -21,15 +26,33 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
-    "@id": "https://190align.com/about.html",
-    "name": "About 1:90 Align",
-    "description": "Learn about 1:90 Align — the business consultancy founded by Phil Martin to help UK SMEs systemise and scale through the proprietary 1:90 Align Framework.",
-    "url": "https://190align.com/about.html",
-    "about": { "@id": "https://190align.com/#organization" },
-    "mentions": [
-      { "@id": "https://190align.com/#founder" },
-      { "@id": "https://190align.com/framework.html#framework" }
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://190align.com/about.html#webpage",
+        "url": "https://190align.com/about.html",
+        "name": "About 1:90 Align | UK Business Consultants & Growth Advisors",
+        "description": "1:90 Align was built by operations specialists with 20+ years of experience systemising businesses. Founded by Phil Martin to solve the disconnect between strategy and daily execution.",
+        "isPartOf": { "@id": "https://190align.com/#website" },
+        "about": { "@id": "https://190align.com/#organization" },
+        "dateModified": "2026-05-01",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://190align.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://190align.com/about.html" }
+          ]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://190align.com/about.html#founder",
+        "name": "Phil Martin",
+        "jobTitle": "Founder",
+        "worksFor": { "@id": "https://190align.com/#organization" },
+        "description": "Started as a vehicle technician, moved into software, completed an MBA, and worked at a successful UK PLC before founding 1:90 Align to solve the disconnect between strategy and daily execution.",
+        "knowsAbout": ["Business operations","Strategic execution","90-day planning frameworks","Team alignment","Business systemisation"]
+      }
     ]
   }
   </script>
@@ -124,6 +147,71 @@
             <p class="text-2xl font-black leading-tight">
               "People from all backgrounds can push this system forward. We're building the first cohort before aggressive marketing begins."
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why We Built This -->
+  <section class="py-32 bg-blue-950 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="fade-up">
+          <h2 class="text-5xl font-black mb-12">WHY WE BUILT THIS</h2>
+          <div class="grid md:grid-cols-2 gap-16">
+            <div class="space-y-6">
+              <p class="text-xl font-bold leading-relaxed text-gray-300">
+                Businesses don't fail because people aren't working hard enough. They fail because the hard work isn't connected to anything that matters. The strategy sits in the boardroom. The execution happens at the desk. And nobody has built the bridge between them.
+              </p>
+              <p class="text-xl font-bold leading-relaxed text-gray-300">
+                Phil spent years inside organisations watching this play out. Talented teams, ambitious strategies, expensive consultants — and still the same result: a 90-day plan that dissolved into reactive firefighting by week three. The problem wasn't effort. It was architecture.
+              </p>
+              <p class="text-xl font-bold leading-relaxed text-gray-300">
+                The 1:90 Align Framework exists to close the Alignment Gap — the structural disconnect between what a business is trying to achieve and what its people actually do each day. Not with motivational posters. With a system that makes the connection structurally unavoidable.
+              </p>
+            </div>
+            <div class="space-y-8">
+              <div class="border-l-4 border-orange-500 pl-8">
+                <p class="text-2xl font-black mb-2">The Problem</p>
+                <p class="text-lg font-bold text-gray-300">Most organisations have annual plans but no system connecting those plans to daily work. Strategy and execution live in separate worlds.</p>
+              </div>
+              <div class="border-l-4 border-orange-500 pl-8">
+                <p class="text-2xl font-black mb-2">The Solution</p>
+                <p class="text-lg font-bold text-gray-300">A four-level hierarchy — Arc, Wave, Milestone, Task — where every piece of work connects upward to a strategic outcome. Enforced by software. Embedded by training.</p>
+              </div>
+              <div class="border-l-4 border-orange-500 pl-8">
+                <p class="text-2xl font-black mb-2">The Result</p>
+                <p class="text-lg font-bold text-gray-300">Teams that know exactly how their daily work connects to where the business is going. Executives who can see progress in real time. And 90-day goals that actually get achieved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto fade-up">
+        <h2 class="text-5xl font-black mb-4">HOW WE WORK</h2>
+        <p class="text-xl font-bold text-gray-600 mb-16 max-w-3xl">1:90 Align is not a consultancy that hands you a report and walks away. We implement alongside you — building capability inside your organisation so the system runs without us.</p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="border-t-4 border-orange-500 pt-8">
+            <p class="text-6xl font-black text-orange-500 mb-4">01</p>
+            <h3 class="text-2xl font-black uppercase mb-4">Diagnose</h3>
+            <p class="text-lg font-bold text-gray-700">We start by understanding where your strategy is breaking down. Where are your goals drifting? Where is daily work disconnected from strategic intent? The Arc Diagnostic maps the specific Alignment Gaps in your organisation.</p>
+          </div>
+          <div class="border-t-4 border-orange-500 pt-8">
+            <p class="text-6xl font-black text-orange-500 mb-4">02</p>
+            <h3 class="text-2xl font-black uppercase mb-4">Deploy</h3>
+            <p class="text-lg font-bold text-gray-700">We implement the full 1:90 system simultaneously: configure the software platform, run the three-tier training programme, and facilitate your first Arc planning session. Your team learns by doing from day one.</p>
+          </div>
+          <div class="border-t-4 border-orange-500 pt-8">
+            <p class="text-6xl font-black text-orange-500 mb-4">03</p>
+            <h3 class="text-2xl font-black uppercase mb-4">Embed</h3>
+            <p class="text-lg font-bold text-gray-700">We stay involved through the first Arc cycle — facilitating Wave Reviews, checking dashboard data, coaching Arc Leaders through their first 90 days. By the time we step back, the system runs independently.</p>
           </div>
         </div>
       </div>

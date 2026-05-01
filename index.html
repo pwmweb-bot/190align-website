@@ -13,7 +13,11 @@
   <meta property="og:description" content="The complete business operating system that connects strategy to daily execution through 90-day cycles." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://190align.com" />
+  <meta property="og:image" content="https://190align.com/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://190align.com/assets/images/og-image.png" />
   <link rel="canonical" href="https://190align.com/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -34,65 +38,62 @@
 
   <!-- Schema.org -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": "https://190align.com/#organization",
-      "name": "1:90 Align",
-      "legalName": "1:90 Align Ltd",
-      "url": "https://190align.com",
-      "description": "UK business consultants specialising in 90-day strategic planning and operational excellence for growing SMEs. Creators of the 1:90 Align Framework — a proprietary methodology connecting daily work to 90-day strategic outcomes.",
-      "foundingDate": "2023",
-      "knowsAbout": ["Strategic planning","90-day execution","Business operating systems","Strategy execution","OKRs","Agile methodology","Team alignment","Capacity planning"],
-      "founder": {
-        "@type": "Person",
-        "@id": "https://190align.com/#founder",
-        "name": "Phil Martin",
-        "jobTitle": "Founder of the 1:90 Align Framework",
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://190align.com/#organization",
+        "name": "1:90 Align",
+        "legalName": "1:90 Align Ltd",
+        "url": "https://190align.com/",
+        "foundingDate": "2023",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://190align.com/assets/images/og-image.png",
+          "caption": "1:90 Align — 90-Day Business Operating System"
+        },
+        "description": "1:90 Align is the complete business operating system that connects strategy to daily execution through 90-day cycles. The Arc → Wave → Milestone → Task framework, supporting software platform, and training programme for teams and consultants.",
+        "areaServed": ["GB","US","CA","ZA","AU","NZ"],
+        "foundingLocation": { "@type": "Place", "addressCountry": "GB" },
+        "contactPoint": [
+          { "@type": "ContactPoint", "telephone": "+44-742-820-9054", "contactType": "customer service", "availableLanguage": "English" },
+          { "@type": "ContactPoint", "email": "contact@190align.com", "contactType": "customer service", "availableLanguage": "English" }
+        ],
         "sameAs": [
-          "https://www.linkedin.com/company/190align"
+          "https://www.linkedin.com/company/190align",
+          "https://x.com/190align",
+          "https://www.facebook.com/190align",
+          "https://www.instagram.com/190align",
+          "https://www.tiktok.com/@190align"
         ]
       },
-      "sameAs": [
-        "https://www.linkedin.com/company/190align",
-        "https://x.com/190align",
-        "https://www.facebook.com/190align",
-        "https://www.instagram.com/190align",
-        "https://www.tiktok.com/@190align"
-      ],
-      "areaServed": ["GB","US","CA","ZA","AU","NZ"],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+44-742-820-9054",
-        "email": "contact@190align.com",
-        "contactType": "customer service",
-        "availableLanguage": "English"
+      {
+        "@type": "WebSite",
+        "@id": "https://190align.com/#website",
+        "url": "https://190align.com/",
+        "name": "1:90 Align",
+        "description": "The complete business operating system that connects strategy to daily execution through 90-day cycles.",
+        "publisher": { "@id": "https://190align.com/#organization" }
       },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "1:90 Align Products & Services",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@id": "https://190align.com/framework.html#framework" } },
-          { "@type": "Offer", "itemOffered": { "@id": "https://190align.com/software.html#software" } },
-          { "@type": "Offer", "itemOffered": { "@id": "https://190align.com/training.html#training" } }
-        ]
+      {
+        "@type": "WebPage",
+        "@id": "https://190align.com/#webpage",
+        "url": "https://190align.com/",
+        "name": "1:90 Align | 90-Day Business Operating System",
+        "description": "Stop planning, start executing. 1:90 Align is the complete business operating system connecting strategy to daily execution through 90-day cycles.",
+        "isPartOf": { "@id": "https://190align.com/#website" },
+        "about": { "@id": "https://190align.com/#organization" },
+        "dateModified": "2026-05-01",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://190align.com/" }
+          ]
+        }
       }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": "https://190align.com/#website",
-      "name": "1:90 Align",
-      "url": "https://190align.com",
-      "publisher": { "@id": "https://190align.com/#organization" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://190align.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-  ]
+    ]
+  }
   </script>
 </head>
 <body class="bg-white">

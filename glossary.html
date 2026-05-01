@@ -14,6 +14,11 @@
   <meta property="og:description" content="Every term in the 1:90 Align Framework, precisely defined. The single source of truth for the 1:90 methodology." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://190align.com/glossary.html" />
+  <meta property="og:image" content="https://190align.com/assets/images/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://190align.com/assets/images/og-image.png" />
   <link rel="canonical" href="https://190align.com/glossary.html" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -31,12 +36,29 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <!-- Schema: DefinedTermSet (AI-readable glossary) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "DefinedTermSet",
-    "@id": "https://190align.com/glossary.html#termset",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://190align.com/glossary.html#webpage",
+        "url": "https://190align.com/glossary.html",
+        "name": "1:90 Align Glossary | Framework Terms & Definitions",
+        "description": "Every term in the 1:90 Align Framework precisely defined — Arc, Wave, Milestone, Task, Ripple, Alignment Gap, Strategy Drift, 90-Day Cadence, Outcome Anchoring, the 1:90 Ratio, and all framework roles.",
+        "isPartOf": { "@id": "https://190align.com/#website" },
+        "dateModified": "2026-05-01",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://190align.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Glossary", "item": "https://190align.com/glossary.html" }
+          ]
+        }
+      },
+      {
+        "@type": "DefinedTermSet",
+        "@id": "https://190align.com/glossary.html#termset",
     "name": "1:90 Align Framework Glossary",
     "description": "The authoritative glossary of terms used within the 1:90 Align Framework — a proprietary business execution methodology created by Phil Martin.",
     "url": "https://190align.com/glossary.html",
@@ -135,6 +157,8 @@
         "description": "The foundational principle of the 1:90 Align Framework: one strategic goal (the Arc) drives 90 days of aligned execution. The '1' represents the primacy of a single, clear strategic outcome. The '90' represents the 90-day execution cycle. The ratio embodies the framework's core belief: focus beats breadth, and 90 days is the optimal unit of strategic time."
       }
     ]
+    }
+  ]
   }
   </script>
 </head>

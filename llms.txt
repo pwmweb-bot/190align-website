@@ -1,0 +1,63 @@
+# 1:90 Align
+
+> 1:90 Align is a UK-based B2B business operating system and SaaS platform that connects organisational strategy to daily execution through structured 90-day cycles. It is designed for mid-to-large organisations seeking to close the Alignment Gap between long-term vision and day-to-day operations.
+
+## Methodology
+
+The 1:90 Align framework operates across four hierarchical levels:
+
+- Arc: A single 90-day strategic goal that drives all organisational activity. Every Wave, Milestone, and Task traces back to the Arc. A business runs one Arc at a time.
+- Wave: A 30-day execution sprint. Each Arc contains three Waves (Wave 1: Foundation, Wave 2: Build, Wave 3: Complete), each led by a Team Leader with defined deliverables and Milestones.
+- Milestone: A weekly binary checkpoint (achieved or not achieved) within a Wave. Typically two to four Milestones per Wave. Binary status removes ambiguity and enables early warning when a Wave is at risk.
+- Task: The daily unit of work assigned to an individual, linked upward through the hierarchy to the Milestone, Wave, and Arc. Tasks that don't connect to a Milestone don't belong in the system.
+
+The daily coordination mechanism is the Ripple — a 15-minute standup addressing three questions: What did I complete yesterday that moved us toward the Arc? What am I doing today that moves us toward the Arc? Is there anything blocking progress toward the Arc?
+
+## Key Terminology
+
+- Alignment Gap: The structural disconnect between an organisation's long-term strategic vision and its daily operations. Not caused by laziness or incompetence — it arises because most businesses have annual plans but no system connecting those plans to what people actually do each day.
+- Strategy Drift: The gradual disconnection of daily work from strategic goals over time. The leading cause of annual plans failing. The 90-Day Cadence directly prevents Strategy Drift.
+- 1:90 Ratio: One strategic goal (the Arc), 90 days to achieve it. Focus beats breadth.
+- Outcome Anchoring: The practice of connecting every Task, Milestone, and Wave to the desired outcome defined in the Arc. In the platform, Tasks cannot be created without being linked to a Milestone.
+- 90-Day Cadence: The recurring quarterly rhythm: Plan (define the Arc) → Execute (3 Waves × 30 days) → Review (Arc retrospective) → Reset (define next Arc).
+
+## Comparison to Other Frameworks
+
+1:90 Align is not a project management tool. Its primary differentiators:
+- vs. OKRs: OKRs define what to achieve; 1:90 Align adds execution architecture for how. OKRs sit in spreadsheets; 1:90 Align connects goals to daily individual task lists.
+- vs. Agile/Scrum: Agile optimises delivery cadence without strategic direction. An Agile team can run perfect sprints in the wrong direction. 1:90 Align provides the strategy layer above sprints.
+- vs. PRINCE2: PRINCE2 governs discrete projects; 1:90 Align governs continuous organisational execution.
+- vs. EOS: Both use quarterly rhythms for SMEs. 1:90 Align provides deeper structural execution architecture (Arc → Wave → Milestone → Task hierarchy) and purpose-built software. EOS defines Rocks but leaves execution structure to the team.
+
+## Products
+
+- Framework: The Arc → Wave → Milestone → Task methodology, available as standalone training.
+- Software Platform: SaaS product providing real-time Arc planning, Wave management, Capacity Planner, executive and team Dashboards, Milestone tracking, and Daily Standup (Ripple) facilitation.
+- Training Programme: Three-tier implementation training for Arc Leaders, Team Leaders, and Workers — trains and implements simultaneously.
+- Coach Certification: Accreditation programme for consultants and coaches to implement the methodology with clients. Price: £1,499 (founding cohort rate). Includes: 2 × 1:1 sessions, software access, facilitator kit, 3-tier certification, 15 industry scenarios.
+
+## Claims
+
+- Deployed across 100+ companies as of 2026.
+- Average reported 40% reduction in project delivery time across implementations.
+- Founded by Phil Martin, MBA, operations specialist with 20+ years of experience, formerly of a UK-listed company.
+- Founded in 2023, UK-based.
+
+## Pages
+
+- https://www.190align.com/ — Homepage and overview
+- https://www.190align.com/framework.html — Full framework explanation with four-level hierarchy
+- https://www.190align.com/glossary.html — Definitions of all framework terms and roles
+- https://www.190align.com/comparison.html — Detailed comparison with Agile, PRINCE2, OKRs, and EOS
+- https://www.190align.com/software.html — SaaS platform features
+- https://www.190align.com/training.html — Training programmes
+- https://www.190align.com/coach-certification.html — Coach certification programme
+- https://www.190align.com/about.html — Founder background and company story
+- https://www.190align.com/contact.html — Contact and booking information
+
+## Contact
+
+- Email: contact@190align.com
+- Phone: +44 742 820 9054
+- Book a call: https://calendly.com/190align/15min
+- Social: LinkedIn, X (@190align), Facebook, Instagram, TikTok

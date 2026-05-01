@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Legal/policy pages — allow crawling (needed for Google Ads compliance)
+# but noindex is handled via meta robots tags in the HTML
+
+# Block ad landing page from organic indexing bots
+Disallow: /lp.html
+
+# Block error page
+Disallow: /404.html
+
+# AI search crawlers — explicitly permitted for AI Overview / citation visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://190align.com/sitemap.xml

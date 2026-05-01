@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1:90 Align | Execute Your Strategy in 90 Days</title>
+  <meta name="description" content="1:90 Align is the complete business operating system — framework, software, and training — that connects strategy to daily execution through 90-day cycles." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://190align.com/lp.html" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-280WMHP1LQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-280WMHP1LQ');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #172554;
+      --orange: #f97316;
+      --white: #ffffff;
+      --gray-100: #f3f4f6;
+      --gray-400: #9ca3af;
+      --gray-700: #374151;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ─────────────────────────────────────── */
+    .header {
+      background: var(--navy);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: inline-block;
+      background: var(--orange);
+      padding: 0.5rem 1rem;
+      transform: skewX(-12deg);
+      text-decoration: none;
+    }
+    .logo span {
+      display: inline-block;
+      transform: skewX(12deg);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: -0.05em;
+    }
+    .header-cta {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.8rem;
+      padding: 0.6rem 1.5rem;
+      text-decoration: none;
+      transform: skewX(-6deg);
+      transition: background 0.2s;
+    }
+    .header-cta span { display: inline-block; transform: skewX(6deg); }
+    .header-cta:hover { background: #fb923c; }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.4rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      max-width: 48rem;
+      margin: 0 auto 1.5rem;
+    }
+    .hero h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--gray-400);
+      max-width: 36rem;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 1rem;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      transform: skewX(-6deg);
+      transition: background 0.2s;
+    }
+    .hero-btn span { display: inline-block; transform: skewX(6deg); }
+    .hero-btn:hover { background: #fb923c; }
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+
+    /* ── Problem / Solution ──────────────────────────── */
+    .section { padding: 4rem 2rem; max-width: 64rem; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.35rem 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .section h2 em { color: var(--orange); font-style: normal; }
+
+    /* Problem list */
+    .problems {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .problems li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 1rem;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+    .problems li::before {
+      content: "✕";
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #fecaca;
+      color: #dc2626;
+      font-weight: 900;
+      font-size: 0.7rem;
+      margin-top: 0.15rem;
+    }
+
+    /* Solution pillars */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .pillar {
+      border: 3px solid var(--navy);
+      padding: 2rem;
+    }
+    .pillar-num {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .pillar h3 {
+      font-size: 1.125rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .pillar p {
+      font-size: 0.9rem;
+      color: var(--gray-700);
+      line-height: 1.6;
+    }
+
+    /* ── Framework steps ─────────────────────────────── */
+    .steps-bg {
+      background: var(--gray-100);
+      padding: 4rem 2rem;
+    }
+    .steps-inner { max-width: 64rem; margin: 0 auto; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .step {
+      background: var(--white);
+      border: 3px solid var(--navy);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .step-period {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+    .step h3 {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .step p {
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+
+    /* ── Stats ────────────────────────────────────────── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      margin-top: 0.25rem;
+    }
+
+    /* ── CTA ──────────────────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--white);
+    }
+    .cta-section h2 {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .cta-section h2 em { color: var(--orange); font-style: normal; }
+    .cta-section p {
+      color: var(--gray-400);
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--navy);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 1.1rem;
+      padding: 1.1rem 3rem;
+      text-decoration: none;
+      transform: skewX(-6deg);
+      transition: background 0.2s;
+    }
+    .cta-btn span { display: inline-block; transform: skewX(6deg); }
+    .cta-btn:hover { background: #fb923c; }
+    .cta-sub {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray-400);
+    }
+    .cta-phone {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .cta-phone a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .cta-phone a:hover { color: var(--orange); }
+
+    /* ── Footer ───────────────────────────────────────── */
+    .footer {
+      background: var(--navy);
+      border-top: 1px solid #1e3a6e;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .footer p {
+      color: var(--gray-400);
+      font-size: 0.75rem;
+    }
+    .footer a {
+      color: var(--gray-400);
+      text-decoration: none;
+    }
+    .footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="https://190align.com" class="logo"><span>1:90</span></a>
+    <a href="https://calendly.com/190align/15min" class="header-cta"><span>Book Free Call</span></a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">90-Day Business Operating System</div>
+    <h1>Stop Planning.<br>Start <em>Executing.</em></h1>
+    <p>Your annual plans fail because they're too long. Your sprints fail because they're disconnected. 1:90 Align is the complete operating system that connects strategy to daily execution through 90-day cycles.</p>
+    <a href="https://calendly.com/190align/15min" class="hero-btn"><span>Book Your Free Call &rarr;</span></a>
+    <p class="hero-sub">15 minutes. No pitch. Just an honest conversation.</p>
+  </section>
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="section-tag">The Problem</div>
+    <h2>Your Business Is <em>Stuck</em></h2>
+    <ul class="problems">
+      <li>Annual plans that nobody follows past February</li>
+      <li>Teams working hard but not on what actually matters</li>
+      <li>Constant firefighting with no forward momentum</li>
+      <li>Silos between departments killing execution</li>
+      <li>Leadership frustrated by lack of accountability</li>
+    </ul>
+  </section>
+
+  <!-- Solution -->
+  <section class="section" style="padding-top: 0;">
+    <div class="section-tag">The Solution</div>
+    <h2>One System. <em>Total Alignment.</em></h2>
+    <p style="color: var(--gray-700); line-height: 1.7; margin-bottom: 1rem;">Unlike project management tools that track tasks or OKR systems that overcomplicate everything, 1:90 Align gives you a complete operating system — framework, software, and expert training — all working together.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <h3>Framework</h3>
+        <p>Arc &rarr; Wave &rarr; Milestone &rarr; Task methodology proven across 100+ companies. Every task connects to strategy.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <h3>Software</h3>
+        <p>Complete platform connecting daily work to strategic goals in real-time. See progress, spot risks, stay aligned.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <h3>Training</h3>
+        <p>Expert consultants who implement the system while training your team. You own the capability from day one.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Framework -->
+  <section class="steps-bg">
+    <div class="steps-inner">
+      <div class="section-tag">The Framework</div>
+      <h2>4 Levels. <em>Total Alignment.</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-period">90 Days</div>
+          <h3>Arc</h3>
+          <p>One strategic goal. Everyone aligned. Complete focus for the quarter.</p>
+        </div>
+        <div class="step">
+          <div class="step-period">30 Days</div>
+          <h3>Wave</h3>
+          <p>Three execution sprints. Plan &rarr; Build &rarr; Deliver. Monthly progress you can see.</p>
+        </div>
+        <div class="step">
+          <div class="step-period">7 Days</div>
+          <h3>Milestone</h3>
+          <p>Weekly checkpoints. Teams coordinate. Risks identified early.</p>
+        </div>
+        <div class="step">
+          <div class="step-period">Daily</div>
+          <h3>Task</h3>
+          <p>Individual work. Clear ownership. Direct line to strategic goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section" style="text-align: center;">
+    <div class="section-tag">Proven Results</div>
+    <h2>Built by Operators. <em>For Operators.</em></h2>
+    <p style="color: var(--gray-700); line-height: 1.7; max-width: 36rem; margin: 0 auto 2rem;">We're not consultants who theorise. We're operations specialists who've systemised businesses for over 20 years — from startups to PLCs.</p>
+    <div class="stats">
+      <div>
+        <div class="stat-num">40%</div>
+        <div class="stat-label">Average reduction in<br>project delivery time</div>
+      </div>
+      <div>
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Companies systemised<br>and aligned</div>
+      </div>
+      <div>
+        <div class="stat-num">90</div>
+        <div class="stat-label">Days to transform<br>your operations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to <em>Execute?</em></h2>
+    <p>Book a free 15-minute call. No pitch. Just an honest conversation about systemising your business.</p>
+    <a href="https://calendly.com/190align/15min" class="cta-btn"><span>Book Your Free Call &rarr;</span></a>
+    <p class="cta-sub">No commitment. No pressure.</p>
+    <p class="cta-phone">Or call <a href="tel:+447428209054">+44 742 820 9054</a></p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <script>document.write(new Date().getFullYear())</script> 1:90 Align Ltd. All rights reserved. &nbsp;|&nbsp; <a href="https://190align.com/privacy.html">Privacy</a> &nbsp;|&nbsp; <a href="https://190align.com/terms.html">Terms</a></p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+/* 1:90 Align — Custom Styles */
+
+/* Scroll animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* Stagger delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* Navigation dropdown */
+.nav-group {
+  /* Extend the hover-detection area downward so moving into the
+     dropdown doesn't break the :hover chain */
+  padding-bottom: 12px;
+  margin-bottom: -12px;
+}
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: #172554;
+  border: 2px solid white;
+  z-index: 100;
+  /* No margin-top — gap was causing hover to break when cursor
+     passed through it. Visual spacing is now handled by nav-group
+     padding-bottom above. */
+}
+.nav-group:hover .nav-dropdown,
+.nav-group:focus-within .nav-dropdown {
+  display: block;
+}
+.nav-dropdown a {
+  display: block;
+  padding: 12px 24px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-dropdown a:hover {
+  background: #f97316;
+  color: #172554;
+}
+
+/* Mobile menu */
+#mobile-menu {
+  display: none;
+}
+#mobile-menu.open {
+  display: block;
+}
+
+/* Interactive framework */
+.framework-item {
+  cursor: pointer;
+}
+.framework-expand {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.framework-expand.open {
+  max-height: 800px;
+}
+
+/* Form focus styles */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #f97316 !important;
+}
+
+/* Skew button hover */
+.skew-btn {
+  display: inline-block;
+  transform: skewX(-12deg);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.skew-btn .label {
+  display: inline-block;
+  transform: skewX(12deg);
+}
+
+/* Prose tables on privacy/legal pages */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+.prose th, .prose td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.prose th {
+  background: #f1f5f9;
+  font-weight: 600;
+}
+
+/* Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #172554;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Calendly dialog */
+#calendly-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+#calendly-modal.open {
+  display: flex;
+}
+#calendly-modal .modal-inner {
+  background: white;
+  width: 90%;
+  max-width: 860px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  position: relative;
+}
+#calendly-modal .modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Success message */
+.form-success {
+  display: none;
+}
+.form-success.visible {
+  display: block;
+}
+
+/* Currency switcher */
+.currency-select {
+  border: 2px solid #172554;
+  background: white;
+  padding: 4px 8px;
+  font-weight: 700;
+  color: #172554;
+  cursor: pointer;
+}
+
+/* Responsive nav */
+@media (max-width: 768px) {
+  .desktop-nav { display: none !important; }
+  #menu-toggle { display: flex !important; }
+}
+@media (min-width: 769px) {
+  #menu-toggle { display: none !important; }
+  #mobile-menu { display: none !important; }
+}

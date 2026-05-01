@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preload" href="assets/css/tailwind.min.css" as="style">
+  <link rel="preload" href="assets/css/style.css" as="style">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Training Programme | 1:90 Framework Implementation | 1:90 Align</title>
+  <meta name="description" content="1:90 Align three-tier training programme for complete organization adoption. Train Arc Leaders, Team Leaders, and Workers on 90-day execution framework." />
+  <meta name="keywords" content="team training programme, leadership training, 90-day framework implementation, organizational training, business execution training" />
+  <meta property="og:title" content="Team Training Programme | 1:90 Framework Implementation | 1:90 Align" />
+  <meta property="og:description" content="Three-tier training programme. Everyone learns. Everyone executes. Complete adoption." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://190align.com/training.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://190align.com/training.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-280WMHP1LQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-280WMHP1LQ');
+  </script>
+
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="assets/css/tailwind.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "@id": "https://190align.com/training.html#training",
+      "name": "1:90 Align Training Programme",
+      "alternateName": ["1:90 Framework Implementation Training","90-Day Execution Training"],
+      "description": "A three-tier training programme that trains the entire organisation on the 1:90 Align Framework simultaneously — Arc Leaders (strategic planning), Team Leaders (execution management), and Workers (daily execution). Unlike theory-only training, participants build their first Arc and plan their first Wave during the programme.",
+      "url": "https://190align.com/training.html",
+      "provider": { "@id": "https://190align.com/#organization" },
+      "educationalLevel": ["Executive","Management","Operational"],
+      "teaches": ["Arc planning","Wave management","Milestone tracking","Ripple standups","Capacity planning","Strategy execution"],
+      "hasCourseInstance": [
+        {
+          "@type": "CourseInstance",
+          "name": "Arc Leaders Training",
+          "description": "Strategic planning training for executives. Covers 90-day Arc definition, Wave planning, and dashboard analysis."
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Team Leaders Training",
+          "description": "Execution management training. Covers Wave execution, Milestone planning, Ripple facilitation, and capacity planning."
+        },
+        {
+          "@type": "CourseInstance",
+          "name": "Workers Training",
+          "description": "Daily execution training. Covers task management, Milestone contribution, and daily standup participation."
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "1:90 Align Organisation Training",
+      "description": "Complete three-tier training programme for full organisational adoption of the 1:90 Align Framework.",
+      "provider": { "@id": "https://190align.com/#organization" },
+      "serviceType": "Business Training & Implementation",
+      "url": "https://190align.com/training.html",
+      "areaServed": ["GB","US","CA","ZA","AU","NZ"]
+    }
+  ]
+  </script>
+</head>
+<body class="bg-white">
+
+  <!-- ── NAVIGATION ───────────────────────────────────────── -->
+  <nav class="bg-blue-950 border-b-4 border-white sticky top-0 z-50">
+    <div class="container mx-auto px-6">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center">
+          <div class="bg-orange-500 px-4 py-2" style="transform:skewX(-12deg)">
+            <span class="text-blue-950 font-black text-2xl tracking-tighter" style="display:inline-block;transform:skewX(12deg)">1:90</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="desktop-nav hidden md:flex items-center gap-8">
+
+          <div class="nav-group relative">
+            <button class="flex items-center gap-1 text-white font-bold hover:text-orange-500 transition-colors uppercase tracking-wider text-sm focus:outline-none">
+              Platform <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <a href="framework.html">Framework</a>
+              <a href="software.html">Software</a>
+              <a href="training.html">Training</a>
+            </div>
+          </div>
+
+          <div class="nav-group relative">
+            <button class="flex items-center gap-1 text-white font-bold hover:text-orange-500 transition-colors uppercase tracking-wider text-sm focus:outline-none">
+              Coaching <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <a href="coach-certification.html">Become a Coach</a>
+            </div>
+          </div>
+
+          <div class="nav-group relative">
+            <button class="flex items-center gap-1 text-white font-bold hover:text-orange-500 transition-colors uppercase tracking-wider text-sm focus:outline-none">
+              Company <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <a href="about.html">About</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+
+          <a href="coach-certification.html">
+            <div class="bg-orange-500 px-6 py-3 hover:bg-white transition-colors cursor-pointer" style="transform:skewX(-12deg)">
+              <span class="text-blue-950 font-black uppercase text-sm tracking-wider" style="display:inline-block;transform:skewX(12deg)">Book Now</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button id="menu-toggle" class="md:hidden p-2 text-white flex items-center justify-center" style="display:flex" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div id="mobile-nav" class="hidden md:hidden pb-4 border-t-2 border-gray-700">
+        <a href="framework.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">Framework</a>
+        <a href="software.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">Software</a>
+        <a href="training.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">Training</a>
+        <a href="coach-certification.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">Become a Coach</a>
+        <a href="about.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">About</a>
+        <a href="contact.html" class="block py-2 px-4 text-white hover:text-orange-500 font-bold">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <section class="py-24 md:py-40 bg-blue-950 text-white relative overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=65&auto=format&fit=crop"
+         alt="Business training session in progress" class="absolute inset-0 w-full h-full object-cover opacity-10" width="1600" height="900"
+  srcset="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=640&q=35&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=35&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&q=35&auto=format&fit=crop 1600w"
+  sizes="(max-width: 640px) 640px, (max-width: 1200px) 1200px, 1600px" fetchpriority="high" />
+    <div class="container mx-auto px-6 relative">
+      <div class="max-w-5xl mx-auto text-center">
+        <h1 class="text-5xl md:text-7xl font-black leading-none mb-8">
+          TRAIN YOUR<br />
+          <span class="text-orange-500">ENTIRE ORGANIZATION</span>
+        </h1>
+        <p class="text-2xl md:text-3xl font-bold leading-relaxed">
+          Three-tier training programme. Everyone learns. Everyone executes. Complete adoption.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3 TRAINING LEVELS ────────────────────────────────── -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-5xl md:text-6xl font-black leading-none mb-16 text-blue-950">3 TRAINING LEVELS</h2>
+
+        <!-- Arc Leaders -->
+        <div class="border-4 border-blue-950 p-8 md:p-12 mb-8 bg-white" style="margin-left: 0px;">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 bg-blue-950 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-orange-500"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <div>
+              <h3 class="text-3xl font-black text-blue-950 uppercase tracking-wider">Arc Leaders</h3>
+              <p class="text-lg font-bold text-gray-600">Strategic Planning</p>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Define 90-day strategic goals</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Arc planning sessions and facilitation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Wave planning and resource allocation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Dashboard analysis and reporting</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Team Leaders -->
+        <div class="border-4 border-blue-950 p-8 md:p-12 mb-8 bg-white" style="margin-left: 40px;">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 bg-blue-950 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-orange-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h3 class="text-3xl font-black text-blue-950 uppercase tracking-wider">Team Leaders</h3>
+              <p class="text-lg font-bold text-gray-600">Execution Management</p>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Wave execution and team coordination</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Milestone planning and tracking</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Daily standup facilitation (Ripples)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Capacity planning and workload balance</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Workers -->
+        <div class="border-4 border-blue-950 p-8 md:p-12 bg-white" style="margin-left: 80px;">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 bg-blue-950 flex items-center justify-center flex-shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 text-orange-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+            <div>
+              <h3 class="text-3xl font-black text-blue-950 uppercase tracking-wider">Workers</h3>
+              <p class="text-lg font-bold text-gray-600">Daily Execution</p>
+            </div>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Task management and ownership</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Milestone contribution</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Daily standup participation</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-500 font-black mt-1">→</span>
+              <span class="font-bold text-gray-700">Progress tracking and updates</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPLETE PACKAGE ──────────────────────────────────── -->
+  <section class="py-32 bg-gray-100">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Expert Training -->
+          <div class="bg-white border-4 border-blue-950 p-8">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-blue-950 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-orange-500"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <h3 class="text-2xl font-black text-blue-950 uppercase tracking-wider">Expert Training</h3>
+            </div>
+            <p class="font-bold text-gray-700">Led by certified 1:90 Align trainers with real-world implementation experience.</p>
+          </div>
+
+          <!-- Resource Library -->
+          <div class="bg-white border-4 border-blue-950 p-8">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-blue-950 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-orange-500"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              </div>
+              <h3 class="text-2xl font-black text-blue-950 uppercase tracking-wider">Resource Library</h3>
+            </div>
+            <p class="font-bold text-gray-700">Complete training materials, templates, and guides for ongoing reference.</p>
+          </div>
+
+          <!-- Software Access -->
+          <div class="bg-white border-4 border-blue-950 p-8">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-blue-950 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-orange-500"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg>
+              </div>
+              <h3 class="text-2xl font-black text-blue-950 uppercase tracking-wider">Software Access</h3>
+            </div>
+            <p class="font-bold text-gray-700">Full platform access during training with hands-on practice environments.</p>
+          </div>
+
+          <!-- Ongoing Support -->
+          <div class="bg-white border-4 border-blue-950 p-8">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-blue-950 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-orange-500"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <h3 class="text-2xl font-black text-blue-950 uppercase tracking-wider">Ongoing Support</h3>
+            </div>
+            <p class="font-bold text-gray-700">Post-training support and follow-up sessions to ensure successful adoption.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY DIFFERENT ────────────────────────────────────── -->
+  <section class="py-32 bg-blue-950 text-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center mb-16">
+          <!-- Text -->
+          <div>
+            <h2 class="text-5xl md:text-6xl font-black leading-none mb-12">WHY DIFFERENT</h2>
+
+            <div class="space-y-8">
+              <p class="text-xl font-bold leading-relaxed text-gray-300">
+                Most training programmes give you the theory and hope you'll figure out how to apply it. Lots of beautiful slides. Lots of note-taking. But then people get back to their desks and the old habits take over. The framework stays on the shelf.
+              </p>
+
+              <p class="text-3xl font-black text-orange-500">
+                We train AND implement simultaneously.
+              </p>
+
+              <p class="text-xl font-bold leading-relaxed text-gray-300">
+                You're not just learning the framework. You're building your first Arc, planning your first Wave, and holding your first Milestone meeting during the training. By the time training ends, you've already started executing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Photo -->
+          <div class="relative">
+            <div class="absolute -top-4 -right-4 w-full h-full border-4 border-orange-500"></div>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=65&auto=format&fit=crop"
+                 alt="Team training workshop in action"
+                 class="relative w-full h-80 md:h-96 object-cover border-4 border-white" loading="lazy" width="800" height="600" />
+          </div>
+        </div>
+
+        <div class="bg-blue-900 border-4 border-orange-500 p-8 md:p-12">
+          <p class="text-2xl md:text-3xl font-black text-center">
+            Complete transparency from day one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REQUEST TRAINING ──────────────────────────────────── -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-blue-950 text-white px-6 py-2 inline-block mb-8" style="transform:skewX(-12deg)">
+          <span class="font-black uppercase tracking-widest" style="display:inline-block;transform:skewX(12deg)">Let's Begin</span>
+        </div>
+        <h2 class="text-5xl font-black leading-none mb-12 text-blue-950">REQUEST TRAINING</h2>
+
+        <!-- Success Message -->
+        <div id="training-form-success" class="hidden border-4 border-blue-950 p-12 text-center">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 text-orange-500 mx-auto mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+          <h3 class="text-3xl font-black mb-4 text-blue-950">TRAINING REQUEST SENT</h3>
+          <p class="text-xl font-bold mb-6 text-blue-950">We'll get back to you within 24 hours to discuss your training programme.</p>
+          <button onclick="document.getElementById('training-form-success').classList.add('hidden');document.getElementById('training-contact-form').style.display='block';"
+            class="bg-orange-500 text-blue-950 px-8 py-3 font-black uppercase hover:bg-blue-950 hover:text-orange-500 transition-colors">Send Another Request</button>
+        </div>
+
+        <!-- Form -->
+        <form id="training-contact-form" class="contact-form space-y-6"
+              action="form-handler.php"
+              method="POST"
+              data-success="training-form-success">
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="tr-name" class="block text-sm font-black uppercase tracking-wider mb-2 text-blue-950">Name *</label>
+              <input type="text" id="tr-name" name="name" required autocomplete="name"
+                class="w-full h-14 bg-white text-blue-950 border-4 border-blue-950 px-4 font-bold focus:border-orange-500" />
+            </div>
+            <div>
+              <label for="tr-company" class="block text-sm font-black uppercase tracking-wider mb-2 text-blue-950">Company *</label>
+              <input type="text" id="tr-company" name="company" required autocomplete="organization"
+                class="w-full h-14 bg-white text-blue-950 border-4 border-blue-950 px-4 font-bold focus:border-orange-500" />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="tr-email" class="block text-sm font-black uppercase tracking-wider mb-2 text-blue-950">Email *</label>
+              <input type="email" id="tr-email" name="email" required autocomplete="email"
+                class="w-full h-14 bg-white text-blue-950 border-4 border-blue-950 px-4 font-bold focus:border-orange-500" />
+            </div>
+            <div>
+              <label for="tr-phone" class="block text-sm font-black uppercase tracking-wider mb-2 text-blue-950">Phone *</label>
+              <input type="tel" id="tr-phone" name="phone" required autocomplete="tel"
+                class="w-full h-14 bg-white text-blue-950 border-4 border-blue-950 px-4 font-bold focus:border-orange-500" />
+            </div>
+          </div>
+
+          <div>
+            <label for="tr-message" class="block text-sm font-black uppercase tracking-wider mb-2 text-blue-950">Message</label>
+            <textarea id="tr-message" name="message" rows="5"
+              class="w-full bg-white text-blue-950 border-4 border-blue-950 px-4 py-3 font-bold focus:border-orange-500 resize-none"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-black uppercase tracking-wider mb-4 text-blue-950">Interests *</label>
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Complete Training Programme Overview" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Complete Training Programme Overview</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Arc Leader Certification" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Arc Leader Certification</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Team Leader Training" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Team Leader Training</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Worker Onboarding" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Worker Onboarding</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Custom Training Packages" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Custom Training Packages</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Implementation Timeline" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Implementation Timeline</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" name="interests" value="Pricing & Investment" class="w-5 h-5" />
+                <span class="font-bold text-blue-950">Pricing & Investment</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Honeypot -->
+          <div style="display:none">
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="form_source" value="Training Page" />
+          <input type="hidden" name="_subject" value="Training Request - 1:90 Align" />
+
+          <button type="submit"
+            class="w-full bg-orange-500 text-blue-950 px-8 py-5 hover:bg-blue-950 hover:text-orange-500 transition-colors disabled:opacity-50 font-black uppercase tracking-wider text-lg"
+            style="transform:skewX(-12deg)">
+            <span class="flex items-center justify-center gap-3" style="display:inline-flex;transform:skewX(12deg)">
+              <span class="label">Request Training</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="py-12 bg-blue-950 border-t-4 border-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+          <div>
+            <div class="bg-orange-500 px-4 py-2 inline-block mb-4" style="transform:skewX(-12deg)">
+              <span class="text-blue-950 font-black text-2xl tracking-tighter" style="display:inline-block;transform:skewX(12deg)">1:90</span>
+            </div>
+            <p class="text-white font-bold text-lg">The complete business operating system for 90-day execution.</p>
+          </div>
+          <div>
+            <h3 class="text-white font-black uppercase tracking-wider mb-4">Navigate</h3>
+            <div class="space-y-2">
+              <a href="framework.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Framework</a>
+              <a href="glossary.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Glossary</a>
+              <a href="comparison.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Framework Comparison</a>
+              <a href="software.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Software</a>
+              <a href="training.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Training</a>
+              <a href="coach-certification.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Coach Certification</a>
+              <a href="about.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">About</a>
+              <a href="contact.html" class="block text-gray-400 hover:text-orange-500 font-bold transition-colors">Contact</a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-white font-black uppercase tracking-wider mb-4">Contact</h3>
+            <div class="space-y-2 text-gray-400 font-bold">
+              <p><a href="tel:+447428209054" class="hover:text-orange-500 transition-colors">+44 742 820 9054</a></p>
+              <p><a href="mailto:contact@190align.com" class="hover:text-orange-500 transition-colors">contact@190align.com</a></p>
+              <div class="flex items-center gap-4 mt-4">
+                <a href="https://linkedin.com/company/190align" aria-label="Visit 1:90 Align on LinkedIn (opens in new tab)" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-500 transition-colors">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="https://x.com/190align" aria-label="Visit 1:90 Align on X / Twitter (opens in new tab)" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-500 transition-colors">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/190align" aria-label="Visit 1:90 Align on Facebook (opens in new tab)" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-500 transition-colors">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/190align" aria-label="Visit 1:90 Align on Instagram (opens in new tab)" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-500 transition-colors">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@190align" aria-label="Visit 1:90 Align on TikTok (opens in new tab)" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-orange-500 transition-colors">
+                  <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t-2 border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-gray-400 font-bold text-sm">© <span id="footer-year"></span> 1:90 Align. All rights reserved.</p>
+          <div class="flex items-center gap-4 text-gray-400 text-sm font-bold">
+            <a href="privacy.html" class="hover:text-white transition-colors">Privacy</a>
+            <a href="terms.html" class="hover:text-white transition-colors">Terms</a>
+            <a href="cookie-policy.html" class="hover:text-white transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lucide Icons -->
+  <!-- Calendly widget -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <!-- Main JS -->
+  <script src="assets/js/main.js" defer></script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — 1:90 Align</title>
+  <link rel="stylesheet" href="/assets/css/tailwind.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body { background: #0a1628; min-height: 100vh; display: flex; flex-direction: column; }
+    .error-container { flex: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem; }
+    .error-code { font-size: 8rem; font-weight: 900; color: #f97316; line-height: 1; letter-spacing: -0.05em; }
+    .error-title { font-size: 1.5rem; font-weight: 700; color: #ffffff; margin-top: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .error-message { color: #9ca3af; margin-top: 1rem; max-width: 28rem; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    .error-cta { display: inline-block; margin-top: 2rem; background: #f97316; color: #172554; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.875rem; padding: 0.75rem 2rem; text-decoration: none; transform: skewX(-6deg); transition: background 0.2s; }
+    .error-cta:hover { background: #fb923c; }
+    .error-cta span { display: inline-block; transform: skewX(6deg); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav style="padding: 1.5rem 2rem;">
+    <a href="/" style="text-decoration: none;">
+      <span style="background: #f97316; display: inline-block; padding: 0.5rem 1rem; transform: skewX(-12deg);">
+        <span style="color: #172554; font-weight: 900; font-size: 1.25rem; letter-spacing: -0.05em; display: inline-block; transform: skewX(12deg);">1:90</span>
+      </span>
+    </a>
+  </nav>
+
+  <!-- Error Content -->
+  <div class="error-container">
+    <div>
+      <div class="error-code">404</div>
+      <div class="error-title">Page not found</div>
+      <p class="error-message">
+        The page you're looking for doesn't exist or has been moved.
+        Let's get you back on track.
+      </p>
+      <a href="/" class="error-cta"><span>Back to Homepage &rarr;</span></a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+# ─────────────────────────────────────────────────────────────
+# 1:90 Align — .htaccess
+# Security headers, WordPress path blocking, and performance
+# ─────────────────────────────────────────────────────────────
+
+# ── Force HTTPS ──────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Redirect HTTP to HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirect www to non-www
+  RewriteCond %{HTTP_HOST} ^www\.190align\.com [NC]
+  RewriteRule ^ https://190align.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+
+# ── Block WordPress Paths (return 404, not 403) ─────────────
+# These paths are probed by Google's scanners and bots.
+# Returning a clean 404 instead of 403/CAPTCHA prevents
+# false "compromised site" flags.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # WordPress core files
+  RewriteRule ^wp-login\.php$    - [R=404,L]
+  RewriteRule ^wp-config\.php$   - [R=404,L]
+  RewriteRule ^wp-cron\.php$     - [R=404,L]
+  RewriteRule ^xmlrpc\.php$      - [R=404,L]
+  RewriteRule ^wp-signup\.php$   - [R=404,L]
+  RewriteRule ^wp-activate\.php$ - [R=404,L]
+  RewriteRule ^wp-mail\.php$     - [R=404,L]
+  RewriteRule ^wp-links-opml\.php$ - [R=404,L]
+  RewriteRule ^wp-trackback\.php$ - [R=404,L]
+  RewriteRule ^wp-settings\.php$ - [R=404,L]
+  RewriteRule ^wp-load\.php$     - [R=404,L]
+  RewriteRule ^wp-blog-header\.php$ - [R=404,L]
+  RewriteRule ^readme\.html$     - [R=404,L]
+  RewriteRule ^license\.txt$     - [R=404,L]
+
+  # WordPress directories
+  RewriteRule ^wp-content/       - [R=404,L]
+  RewriteRule ^wp-includes/      - [R=404,L]
+  RewriteRule ^wp-admin/         - [R=404,L]
+  RewriteRule ^wp-json/          - [R=404,L]
+
+  # WordPress config backups (common attack target)
+  RewriteRule ^wp-config\.php\.bak$ - [R=404,L]
+  RewriteRule ^wp-config\.old$   - [R=404,L]
+  RewriteRule ^wp-config\.txt$   - [R=404,L]
+  RewriteRule ^wp-config\.save$  - [R=404,L]
+</IfModule>
+
+
+# ── Block Sensitive Files ────────────────────────────────────
+# Prevent access to files that should never be public
+
+<FilesMatch "(^\.env|^\.git|^\.htpasswd|^\.DS_Store|\.sql$|\.log$|\.bak$|\.swp$)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+
+# ── Security Headers ────────────────────────────────────────
+<IfModule mod_headers.c>
+  # Prevent clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Enable XSS protection
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Enforce HTTPS for 1 year (including subdomains)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Control referrer information
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restrict browser features
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+  # Content Security Policy
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://assets.calendly.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com https://*.supabase.co data:; frame-src https://calendly.com https://www.google.com; connect-src 'self' https://www.google-analytics.com https://calendly.com; font-src 'self'; base-uri 'self'; form-action 'self'"
+
+  # Prevent the site from being embedded in other sites
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+
+  # Remove server version info
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+
+# ── Caching ──────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML — short cache, must revalidate
+  ExpiresByType text/html "access plus 1 hour"
+
+  # CSS and JS — longer cache
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+
+  # Images — long cache
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+
+  # XML/JSON
+  ExpiresByType application/xml "access plus 1 day"
+  ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+
+# ── Compression ──────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+
+# ── Custom Error Pages ───────────────────────────────────────
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html

@@ -18,6 +18,46 @@
 </IfModule>
 
 
+# ── Fix 404 URLs detected in Google Search Console ───────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /about and /About → about.html
+  RewriteRule ^[Aa]bout$              /about.html [R=301,L]
+
+  # /Home → homepage
+  RewriteRule ^Home$                  / [R=301,L]
+
+  # /blog (bare, no trailing slash) → blog index
+  RewriteRule ^blog$                  /blog/ [R=301,L]
+
+  # Old BlogPost?slug= URLs → new /blog/*.html pages
+  RewriteCond %{QUERY_STRING} ^slug=what-is-business-operating-system$
+  RewriteRule ^BlogPost$              /blog/what-is-business-operating-system.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=how-to-create-90-day-business-goals$
+  RewriteRule ^BlogPost$              /blog/how-to-create-90-day-business-goals.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=proven-90-day-planning-framework$
+  RewriteRule ^BlogPost$              /blog/proven-90-day-planning-framework.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=why-annual-business-planning-fails$
+  RewriteRule ^BlogPost$              /blog/why-annual-business-planning-fails.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=cost-of-not-having-business-operating-system$
+  RewriteRule ^BlogPost$              /blog/cost-of-not-having-business-operating-system.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=task-based-capacity-planning-workload-management$
+  RewriteRule ^BlogPost$              /blog/task-based-capacity-planning-workload-management.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=how-to-hold-your-team-accountable-without-micromanaging$
+  RewriteRule ^BlogPost$              /blog/how-to-hold-your-team-accountable-without-micromanaging.html? [R=301,L]
+
+  RewriteCond %{QUERY_STRING} ^slug=why-coach-certification-includes-mini-mba$
+  RewriteRule ^BlogPost$              /blog/why-coach-certification-includes-mini-mba.html? [R=301,L]
+</IfModule>
+
+
 # ── Block WordPress Paths (return 404, not 403) ─────────────
 # These paths are probed by Google's scanners and bots.
 # Returning a clean 404 instead of 403/CAPTCHA prevents

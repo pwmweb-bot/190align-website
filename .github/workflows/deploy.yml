@@ -1,0 +1,42 @@
+name: Deploy to 20i
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: SFTP Deploy to 190align.com
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via SFTP
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+        run: |
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST":"$SFTP_PORT" <<EOF
+          set sftp:auto-confirm yes
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          mirror --reverse --delete --verbose \
+            --exclude ^\.git/ \
+            --exclude ^\.github/ \
+            --exclude ^\.claude/ \
+            --exclude ^content-strategy/ \
+            --exclude ^seo-audit/ \
+            --exclude ^node_modules/ \
+            --exclude ^\.env \
+            --exclude ^\.DS_Store \
+            . /
+          bye
+          EOF

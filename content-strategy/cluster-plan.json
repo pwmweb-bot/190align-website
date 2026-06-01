@@ -1,0 +1,406 @@
+{
+  "meta": {
+    "site": "www.190align.com",
+    "generated": "2026-05-29",
+    "method": "SERP Overlap Clustering",
+    "totalKeywords": 50,
+    "totalClusters": 6,
+    "totalPostsPlanned": 23,
+    "totalPostsExisting": 8,
+    "totalNewPostsNeeded": 15,
+    "estimatedWordsExisting": 11200,
+    "estimatedWordsPlanned": 35000,
+    "estimatedMonthlyVisitsNow": 300,
+    "estimatedMonthlyVisitsFull": 5500
+  },
+  "pillars": [
+    {
+      "id": "bos-guide",
+      "title": "The Ultimate Guide to Business Operating Systems",
+      "keyword": "business operating system",
+      "secondaryKeywords": ["company operating system", "what is a business operating system", "business operating system framework"],
+      "url": "/blog/business-operating-system-guide/",
+      "wordCount": 3500,
+      "template": "ultimate-guide",
+      "intent": "informational",
+      "status": "needed",
+      "priority": 1,
+      "estimatedVolume": 1600,
+      "competingUrls": ["eosworldwide.com", "ninety.io", "bloomgrowth.com", "strety.com"],
+      "ukOpportunity": true,
+      "notes": "All top-10 results are US-based. First UK-native comprehensive guide wins this."
+    },
+    {
+      "id": "90-day-guide",
+      "title": "The Complete 90-Day Planning Framework Guide",
+      "keyword": "90-day planning framework",
+      "secondaryKeywords": ["quarterly planning framework", "quarterly operating rhythm", "90-day execution plan"],
+      "url": "/blog/90-day-planning-guide/",
+      "wordCount": 3000,
+      "template": "ultimate-guide",
+      "intent": "informational",
+      "status": "needed",
+      "priority": 2,
+      "estimatedVolume": 1200,
+      "competingUrls": ["rhythmsystems.com", "monday.com", "strategyskills.com"],
+      "ukOpportunity": true
+    },
+    {
+      "id": "software-comparison",
+      "title": "Strategy Execution Software: 1:90 Align vs The Field",
+      "keyword": "strategy execution software",
+      "secondaryKeywords": ["strategic planning software UK", "business execution platform", "quarterly planning software"],
+      "url": "/software.html",
+      "wordCount": 2500,
+      "template": "comparison",
+      "intent": "commercial",
+      "status": "upgrade-needed",
+      "priority": 5,
+      "estimatedVolume": 2400,
+      "competingUrls": ["cascade.app", "achieveit.com", "clearpointstrategy.com", "quantive.com"],
+      "ukOpportunity": true
+    }
+  ],
+  "clusters": [
+    {
+      "id": "cluster-bos",
+      "name": "Business Operating System",
+      "color": "#1e3a5f",
+      "pillarId": "bos-guide",
+      "posts": [
+        {
+          "id": "what-is-bos",
+          "title": "What Is a Business Operating System?",
+          "keyword": "what is a business operating system",
+          "url": "/blog/what-is-business-operating-system.html",
+          "wordCount": 1100,
+          "template": "explainer",
+          "intent": "informational",
+          "status": "published",
+          "estimatedVolume": 880
+        },
+        {
+          "id": "cost-bos",
+          "title": "The Hidden Cost of Not Having a Business Operating System",
+          "keyword": "cost of poor business execution",
+          "url": "/blog/cost-of-not-having-business-operating-system.html",
+          "wordCount": 1200,
+          "template": "listicle",
+          "intent": "informational",
+          "status": "published",
+          "estimatedVolume": 480
+        },
+        {
+          "id": "eos-alternative",
+          "title": "Why We're the EOS Alternative Built for UK Businesses",
+          "keyword": "EOS alternative",
+          "secondaryKeywords": ["EOS alternative UK", "entrepreneurial operating system alternative"],
+          "url": "/blog/eos-alternative/",
+          "wordCount": 2000,
+          "template": "comparison",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 3,
+          "estimatedVolume": 720,
+          "ukOpportunity": true,
+          "notes": "Huge gap — no UK-native EOS alternative content. Direct traffic from people frustrated with EOS."
+        },
+        {
+          "id": "how-to-build-bos",
+          "title": "How to Build a Business Operating System: Step-by-Step Guide",
+          "keyword": "how to build a business operating system",
+          "url": "/blog/how-to-build-a-business-operating-system/",
+          "wordCount": 1800,
+          "template": "how-to",
+          "intent": "informational",
+          "status": "needed",
+          "priority": 9,
+          "estimatedVolume": 390
+        },
+        {
+          "id": "bos-examples",
+          "title": "Business Operating System Examples: 5 Real-World Models",
+          "keyword": "business operating system examples",
+          "url": "/blog/business-operating-system-examples/",
+          "wordCount": 1600,
+          "template": "listicle",
+          "intent": "informational",
+          "status": "needed",
+          "priority": 10,
+          "estimatedVolume": 260
+        }
+      ]
+    },
+    {
+      "id": "cluster-90day",
+      "name": "90-Day Planning",
+      "color": "#f97316",
+      "pillarId": "90-day-guide",
+      "posts": [
+        {
+          "id": "90day-goals",
+          "title": "How to Create 90-Day Business Goals That Actually Get Done",
+          "keyword": "how to create 90-day business goals",
+          "url": "/blog/how-to-create-90-day-business-goals.html",
+          "wordCount": 1300,
+          "template": "how-to",
+          "intent": "how-to",
+          "status": "published",
+          "estimatedVolume": 720
+        },
+        {
+          "id": "proven-framework",
+          "title": "The Proven 90-Day Planning Framework",
+          "keyword": "proven 90-day planning framework",
+          "url": "/blog/proven-90-day-planning-framework.html",
+          "wordCount": 1100,
+          "template": "explainer",
+          "intent": "informational",
+          "status": "published",
+          "estimatedVolume": 1200
+        },
+        {
+          "id": "annual-fails",
+          "title": "Why Annual Business Planning Fails (And What to Do Instead)",
+          "keyword": "why annual business planning fails",
+          "url": "/blog/why-annual-business-planning-fails.html",
+          "wordCount": 1150,
+          "template": "listicle",
+          "intent": "informational",
+          "status": "published",
+          "estimatedVolume": 390
+        },
+        {
+          "id": "90day-template",
+          "title": "The 90-Day Business Plan Template",
+          "keyword": "90-day business plan template",
+          "url": "/blog/90-day-business-plan-template/",
+          "wordCount": 1400,
+          "template": "how-to",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 11,
+          "estimatedVolume": 650
+        },
+        {
+          "id": "quarterly-rhythm",
+          "title": "Quarterly Operating Rhythm: Build Your Execution Cadence",
+          "keyword": "quarterly operating rhythm",
+          "url": "/blog/quarterly-operating-rhythm/",
+          "wordCount": 1400,
+          "template": "explainer",
+          "intent": "informational",
+          "status": "needed",
+          "priority": 14,
+          "estimatedVolume": 260
+        }
+      ]
+    },
+    {
+      "id": "cluster-comparisons",
+      "name": "Framework Comparisons",
+      "color": "#7c3aed",
+      "posts": [
+        {
+          "id": "comparison-page",
+          "title": "1:90 Align vs EOS vs OKRs vs Agile vs Monday.com",
+          "keyword": "business framework comparison",
+          "url": "/comparison.html",
+          "wordCount": 2500,
+          "template": "comparison",
+          "intent": "commercial",
+          "status": "upgrade-needed",
+          "priority": 7,
+          "estimatedVolume": 1200,
+          "notes": "Upgrade: Add EOS and Scaling Up. Retarget for broader framework comparison query."
+        },
+        {
+          "id": "okr-alternative",
+          "title": "OKR Alternative: The Case for 90-Day Execution Cycles",
+          "keyword": "OKR alternative",
+          "url": "/blog/okr-alternative/",
+          "wordCount": 1800,
+          "template": "comparison",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 4,
+          "estimatedVolume": 1400,
+          "notes": "High volume, high commercial intent. People searching this are frustrated with OKRs — perfect lead."
+        },
+        {
+          "id": "eos-vs-okrs",
+          "title": "EOS vs OKRs vs 1:90 Align: Which Framework Wins?",
+          "keyword": "EOS vs OKRs",
+          "url": "/blog/eos-vs-okrs-vs-190align/",
+          "wordCount": 2000,
+          "template": "comparison",
+          "intent": "informational",
+          "status": "needed",
+          "priority": 15,
+          "estimatedVolume": 880
+        }
+      ]
+    },
+    {
+      "id": "cluster-software",
+      "name": "Software Comparisons",
+      "color": "#059669",
+      "posts": [
+        {
+          "id": "best-software-uk",
+          "title": "Best Business Planning Software UK (2026)",
+          "keyword": "best business planning software UK",
+          "url": "/blog/best-business-planning-software-uk/",
+          "wordCount": 2500,
+          "template": "best-of",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 6,
+          "estimatedVolume": 720
+        },
+        {
+          "id": "eos-software",
+          "title": "EOS Software vs 1:90 Align: Feature Comparison",
+          "keyword": "EOS software alternative",
+          "url": "/blog/eos-software-vs-190align/",
+          "wordCount": 1500,
+          "template": "comparison",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 7,
+          "estimatedVolume": 390
+        },
+        {
+          "id": "monday-alternative",
+          "title": "Monday.com vs 1:90 Align: Beyond Task Management",
+          "keyword": "Monday.com alternative for strategy",
+          "url": "/blog/monday-com-vs-190align/",
+          "wordCount": 1500,
+          "template": "comparison",
+          "intent": "commercial",
+          "status": "needed",
+          "priority": 8,
+          "estimatedVolume": 1200
+        }
+      ]
+    },
+    {
+      "id": "cluster-team",
+      "name": "Team & Operations",
+      "color": "#dc2626",
+      "posts": [
+        {
+          "id": "accountability",
+          "title": "How to Hold Your Team Accountable Without Micromanaging",
+          "keyword": "team accountability without micromanaging",
+          "url": "/blog/how-to-hold-your-team-accountable-without-micromanaging.html",
+          "wordCount": 1200,
+          "template": "how-to",
+          "intent": "how-to",
+          "status": "published",
+          "estimatedVolume": 480
+        },
+        {
+          "id": "capacity-planning",
+          "title": "Task-Based Capacity Planning & Workload Management",
+          "keyword": "capacity planning workload management",
+          "url": "/blog/task-based-capacity-planning-workload-management.html",
+          "wordCount": 1200,
+          "template": "how-to",
+          "intent": "how-to",
+          "status": "published",
+          "estimatedVolume": 720
+        },
+        {
+          "id": "daily-standup",
+          "title": "How to Run a 15-Minute Daily Standup That Actually Works",
+          "keyword": "daily standup best practices",
+          "url": "/blog/daily-standup-guide/",
+          "wordCount": 1400,
+          "template": "how-to",
+          "intent": "how-to",
+          "status": "needed",
+          "priority": 13,
+          "estimatedVolume": 390
+        }
+      ]
+    },
+    {
+      "id": "cluster-coaching",
+      "name": "Coaching & Certification",
+      "color": "#d97706",
+      "posts": [
+        {
+          "id": "coach-cert",
+          "title": "Why Our Coach Certification Includes a Mini-MBA in Execution",
+          "keyword": "business coach certification UK",
+          "url": "/blog/why-coach-certification-includes-mini-mba.html",
+          "wordCount": 1200,
+          "template": "explainer",
+          "intent": "commercial",
+          "status": "published",
+          "estimatedVolume": 1600
+        },
+        {
+          "id": "become-coach",
+          "title": "How to Become a Business Coach in the UK",
+          "keyword": "become a business coach UK",
+          "url": "/blog/become-business-coach-uk/",
+          "wordCount": 1500,
+          "template": "how-to",
+          "intent": "informational",
+          "status": "needed",
+          "priority": 13,
+          "estimatedVolume": 880
+        },
+        {
+          "id": "systemise-scale",
+          "title": "How to Systemise and Scale Your Business (UK Guide)",
+          "keyword": "systemise business UK",
+          "url": "/blog/systemise-scale-business-uk/",
+          "wordCount": 1600,
+          "template": "how-to",
+          "intent": "how-to",
+          "status": "needed",
+          "priority": 12,
+          "estimatedVolume": 590,
+          "ukOpportunity": true
+        }
+      ]
+    }
+  ],
+  "links": [
+    { "from": "what-is-bos", "to": "bos-guide", "type": "mandatory", "anchor": "business operating system" },
+    { "from": "cost-bos", "to": "bos-guide", "type": "mandatory", "anchor": "business operating system" },
+    { "from": "eos-alternative", "to": "bos-guide", "type": "mandatory", "anchor": "business operating system" },
+    { "from": "how-to-build-bos", "to": "bos-guide", "type": "mandatory", "anchor": "complete guide to business operating systems" },
+    { "from": "bos-examples", "to": "bos-guide", "type": "mandatory", "anchor": "what a business operating system looks like" },
+    { "from": "proven-framework", "to": "90-day-guide", "type": "mandatory", "anchor": "90-day planning framework" },
+    { "from": "90day-goals", "to": "90-day-guide", "type": "mandatory", "anchor": "90-day planning" },
+    { "from": "annual-fails", "to": "90-day-guide", "type": "mandatory", "anchor": "90-day alternative to annual planning" },
+    { "from": "90day-template", "to": "90-day-guide", "type": "mandatory", "anchor": "90-day planning framework" },
+    { "from": "quarterly-rhythm", "to": "90-day-guide", "type": "mandatory", "anchor": "quarterly planning" },
+    { "from": "bos-guide", "to": "what-is-bos", "type": "mandatory", "anchor": "what is a business operating system" },
+    { "from": "bos-guide", "to": "cost-bos", "type": "mandatory", "anchor": "cost of not having a BOS" },
+    { "from": "bos-guide", "to": "eos-alternative", "type": "mandatory", "anchor": "EOS alternative" },
+    { "from": "bos-guide", "to": "how-to-build-bos", "type": "mandatory", "anchor": "how to build a business operating system" },
+    { "from": "bos-guide", "to": "software-comparison", "type": "mandatory", "anchor": "business operating system software" },
+    { "from": "90-day-guide", "to": "proven-framework", "type": "mandatory", "anchor": "the 90-day planning framework" },
+    { "from": "90-day-guide", "to": "90day-goals", "type": "mandatory", "anchor": "how to create 90-day business goals" },
+    { "from": "90-day-guide", "to": "annual-fails", "type": "mandatory", "anchor": "why annual planning fails" },
+    { "from": "90-day-guide", "to": "90day-template", "type": "mandatory", "anchor": "90-day business plan template" },
+    { "from": "90-day-guide", "to": "quarterly-rhythm", "type": "mandatory", "anchor": "quarterly operating rhythm" },
+    { "from": "eos-alternative", "to": "okr-alternative", "type": "spoke-spoke", "anchor": "OKR alternative" },
+    { "from": "eos-alternative", "to": "comparison-page", "type": "spoke-spoke", "anchor": "how 1:90 Align compares to EOS" },
+    { "from": "okr-alternative", "to": "proven-framework", "type": "cross-cluster", "anchor": "90-day planning as an OKR alternative" },
+    { "from": "annual-fails", "to": "okr-alternative", "type": "cross-cluster", "anchor": "why OKRs also fail without an execution rhythm" },
+    { "from": "capacity-planning", "to": "90-day-guide", "type": "cross-cluster", "anchor": "quarterly planning" },
+    { "from": "accountability", "to": "bos-guide", "type": "cross-cluster", "anchor": "business operating system" },
+    { "from": "systemise-scale", "to": "bos-guide", "type": "cross-cluster", "anchor": "business operating system" },
+    { "from": "systemise-scale", "to": "90-day-guide", "type": "cross-cluster", "anchor": "90-day planning framework" },
+    { "from": "coach-cert", "to": "bos-guide", "type": "cross-cluster", "anchor": "business operating system" },
+    { "from": "best-software-uk", "to": "software-comparison", "type": "commercial", "anchor": "1:90 Align software" },
+    { "from": "eos-software", "to": "software-comparison", "type": "commercial", "anchor": "1:90 Align platform" },
+    { "from": "monday-alternative", "to": "software-comparison", "type": "commercial", "anchor": "1:90 Align" }
+  ]
+}

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1:90 Align — SEO Content Cluster Map</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+  header { background: #1e293b; border-bottom: 4px solid #f97316; padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-badge { background: #f97316; padding: 6px 14px; transform: skewX(-12deg); }
+  .logo-text { color: #0f172a; font-weight: 900; font-size: 20px; display: inline-block; transform: skewX(12deg); }
+  .header-title { font-size: 18px; font-weight: 700; color: #94a3b8; }
+  .stats-bar { background: #1e293b; padding: 16px 32px; display: flex; gap: 32px; flex-wrap: wrap; border-bottom: 1px solid #334155; }
+  .stat { text-align: center; }
+  .stat-val { font-size: 28px; font-weight: 900; color: #f97316; }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-top: 2px; }
+  .main { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 140px); }
+  .sidebar { background: #1e293b; padding: 24px; border-right: 1px solid #334155; overflow-y: auto; }
+  .sidebar h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #f97316; margin-bottom: 16px; }
+  .cluster-legend { display: flex; flex-direction: column; gap: 8px; margin-bottom: 32px; }
+  .legend-item { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 8px 10px; border-radius: 6px; transition: background 0.2s; }
+  .legend-item:hover { background: #334155; }
+  .legend-item.active { background: #334155; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-name { font-size: 13px; font-weight: 600; }
+  .legend-count { font-size: 11px; color: #64748b; margin-left: auto; }
+  .phase-list { margin-bottom: 24px; }
+  .phase-item { padding: 10px; background: #0f172a; margin-bottom: 8px; border-left: 3px solid #334155; }
+  .phase-item.p1 { border-color: #ef4444; }
+  .phase-item.p2 { border-color: #f97316; }
+  .phase-item.p3 { border-color: #eab308; }
+  .phase-num { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; }
+  .phase-title { font-size: 12px; font-weight: 600; margin-top: 3px; }
+  .canvas-area { padding: 32px; overflow: auto; }
+  .canvas-area h2 { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+  .canvas-area .subtitle { color: #64748b; font-size: 13px; margin-bottom: 32px; }
+  .cluster-grid { display: flex; flex-direction: column; gap: 32px; }
+  .pillar-section { background: #1e293b; border: 2px solid #f97316; padding: 24px; }
+  .pillar-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+  .pillar-badge { background: #f97316; padding: 4px 12px; transform: skewX(-12deg); display: inline-block; margin-bottom: 8px; }
+  .pillar-badge span { display: inline-block; transform: skewX(12deg); font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #0f172a; }
+  .pillar-title { font-size: 20px; font-weight: 900; color: #f97316; margin-bottom: 4px; }
+  .pillar-kw { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
+  .pillar-meta { display: flex; gap: 16px; }
+  .meta-chip { font-size: 11px; background: #0f172a; padding: 4px 10px; color: #94a3b8; }
+  .status-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; }
+  .status-published { background: #065f46; color: #34d399; }
+  .status-needed { background: #7f1d1d; color: #fca5a5; }
+  .status-upgrade { background: #78350f; color: #fcd34d; }
+  .spokes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .spoke-card { background: #0f172a; padding: 16px; border: 1px solid #334155; cursor: pointer; transition: border-color 0.2s, transform 0.1s; position: relative; }
+  .spoke-card:hover { border-color: #f97316; transform: translateY(-2px); }
+  .spoke-card .cluster-tag { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px; margin-bottom: 10px; display: inline-block; }
+  .spoke-card h4 { font-size: 13px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; }
+  .spoke-card .kw { font-size: 11px; color: #64748b; margin-bottom: 6px; font-style: italic; }
+  .spoke-card .spoke-meta { display: flex; align-items: center; justify-content: space-between; }
+  .spoke-card .vol { font-size: 11px; color: #f97316; font-weight: 700; }
+  .spoke-card .words { font-size: 11px; color: #64748b; }
+  .spoke-card .priority-flag { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
+  .p1 { background: #ef4444; color: white; }
+  .p2 { background: #f97316; color: white; }
+  .p3 { background: #eab308; color: #0f172a; }
+  .done { background: #065f46; color: #34d399; font-size: 13px; }
+  .uk-badge { position: absolute; bottom: 8px; right: 8px; font-size: 9px; background: #1e3a5f; color: #60a5fa; padding: 2px 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; margin-bottom: 12px; padding-left: 4px; border-left: 2px solid #334155; padding-left: 8px; }
+  .link-matrix { background: #1e293b; padding: 24px; margin-top: 32px; }
+  .link-matrix h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #f97316; margin-bottom: 16px; }
+  .link-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .link-table th { background: #0f172a; padding: 8px 12px; text-align: left; color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .link-table td { padding: 8px 12px; border-bottom: 1px solid #1e293b; }
+  .link-table tr:hover td { background: #0f172a; }
+  .link-type { font-size: 10px; padding: 2px 8px; font-weight: 700; text-transform: uppercase; }
+  .mandatory { background: #1e3a5f; color: #60a5fa; }
+  .spoke-spoke { background: #1a1a2e; color: #a78bfa; }
+  .cross-cluster { background: #1a2e1a; color: #4ade80; }
+  .commercial { background: #2e1a00; color: #fb923c; }
+  .gap-analysis { background: #1e293b; padding: 24px; margin-top: 32px; }
+  .gap-analysis h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #f97316; margin-bottom: 16px; }
+  .gap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .gap-card { background: #0f172a; padding: 16px; border-left: 3px solid #f97316; }
+  .gap-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .gap-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+  .progress-section { background: #1e293b; padding: 24px; margin-top: 32px; }
+  .progress-section h3 { font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #f97316; margin-bottom: 20px; }
+  .progress-bar-wrap { margin-bottom: 16px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; }
+  .progress-bar { height: 8px; background: #334155; border-radius: 0; }
+  .progress-fill { height: 100%; background: #f97316; border-radius: 0; transition: width 1s ease; }
+  .tooltip { display: none; position: fixed; background: #1e293b; border: 1px solid #f97316; padding: 12px 16px; max-width: 280px; z-index: 100; font-size: 12px; pointer-events: none; }
+  .tooltip.visible { display: block; }
+  .tooltip h5 { font-size: 13px; font-weight: 900; color: #f97316; margin-bottom: 6px; }
+  .tooltip p { color: #94a3b8; line-height: 1.5; }
+  .volume-bar { width: 100%; height: 3px; background: #334155; margin-top: 8px; }
+  .volume-fill { height: 100%; background: #f97316; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-badge"><span class="logo-text">1:90</span></div>
+    <div>
+      <div style="font-weight:900;font-size:16px;">SEO Content Cluster Map</div>
+      <div style="font-size:12px;color:#64748b;">Generated 29 May 2026 · SERP Overlap Methodology</div>
+    </div>
+  </div>
+  <div class="header-title">www.190align.com</div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">50</div><div class="stat-label">Keywords Mapped</div></div>
+  <div class="stat"><div class="stat-val">6</div><div class="stat-label">Clusters</div></div>
+  <div class="stat"><div class="stat-val">3</div><div class="stat-label">Pillar Pages</div></div>
+  <div class="stat"><div class="stat-val">8</div><div class="stat-label">Posts Live</div></div>
+  <div class="stat"><div class="stat-val">15</div><div class="stat-label">Posts Needed</div></div>
+  <div class="stat"><div class="stat-val" style="color:#34d399;">5,500</div><div class="stat-label">Est. Monthly Visits (Full)</div></div>
+  <div class="stat"><div class="stat-val" style="color:#94a3b8;">300</div><div class="stat-label">Est. Monthly Visits (Now)</div></div>
+</div>
+
+<div class="main">
+  <aside class="sidebar">
+    <h3>Clusters</h3>
+    <div class="cluster-legend">
+      <div class="legend-item active"><div class="legend-dot" style="background:#1e3a5f;border:2px solid #60a5fa;"></div><span class="legend-name">Business Operating System</span><span class="legend-count">5</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f97316;"></div><span class="legend-name">90-Day Planning</span><span class="legend-count">5</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed;"></div><span class="legend-name">Framework Comparisons</span><span class="legend-count">3</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#059669;"></div><span class="legend-name">Software Comparisons</span><span class="legend-count">3</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#dc2626;"></div><span class="legend-name">Team & Operations</span><span class="legend-count">3</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#d97706;"></div><span class="legend-name">Coaching & Certification</span><span class="legend-count">3</span></div>
+    </div>
+
+    <h3>Build Phases</h3>
+    <div class="phase-list">
+      <div class="phase-item p1">
+        <div class="phase-num">Phase 1 · Weeks 1–4</div>
+        <div class="phase-title">Pillar Pages</div>
+      </div>
+      <div class="phase-item p2">
+        <div class="phase-num">Phase 2 · Weeks 5–8</div>
+        <div class="phase-title">Commercial Pages</div>
+      </div>
+      <div class="phase-item p3">
+        <div class="phase-num">Phase 3 · Weeks 9–16</div>
+        <div class="phase-title">Spoke Depth</div>
+      </div>
+    </div>
+
+    <h3>Legend</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:11px;">
+      <div style="display:flex;align-items:center;gap:8px;"><span class="status-badge status-published">✓ LIVE</span> Published</div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="status-badge status-needed">★ NEW</span> Needs writing</div>
+      <div style="display:flex;align-items:center;gap:8px;"><span class="status-badge status-upgrade">↑ UPGRADE</span> Upgrade existing</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px;"><span style="background:#1e3a5f;color:#60a5fa;font-size:10px;font-weight:700;padding:2px 6px;">UK</span> UK-specific opportunity</div>
+    </div>
+
+    <div style="margin-top:32px;padding:16px;background:#0f172a;border-left:3px solid #f97316;">
+      <div style="font-size:11px;color:#f97316;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Key Insight</div>
+      <div style="font-size:12px;color:#94a3b8;line-height:1.6;">No UK-native brand owns "business operating system" or "EOS alternative UK". All top-10 results are US-based. 1:90 Align can own this entire cluster with targeted UK content.</div>
+    </div>
+  </aside>
+
+  <div class="canvas-area">
+    <h2>Content Cluster Architecture</h2>
+    <p class="subtitle">Hub-and-spoke model based on SERP overlap analysis · Hover cards for detail</p>
+
+    <div class="cluster-grid">
+
+      <!-- PILLAR 1: BOS -->
+      <div class="pillar-section">
+        <div class="pillar-header">
+          <div>
+            <div class="pillar-badge"><span>Pillar 1 — Primary Hub</span></div>
+            <div class="pillar-title">Business Operating System Cluster</div>
+            <div class="pillar-kw">Head keyword: "business operating system" · ~1,600/mo</div>
+            <div class="pillar-meta">
+              <span class="meta-chip">5 posts</span>
+              <span class="meta-chip">2 live</span>
+              <span class="meta-chip">3 needed</span>
+              <span class="meta-chip" style="color:#f97316;">🔴 Highest priority</span>
+            </div>
+          </div>
+          <span class="status-badge status-needed">★ NEW PILLAR PAGE</span>
+        </div>
+
+        <div class="section-label">Pillar Page</div>
+        <div class="spokes-grid" style="margin-bottom:20px;">
+          <div class="spoke-card" style="border-color:#f97316;">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS Hub</span>
+            <h4>The Ultimate Guide to Business Operating Systems</h4>
+            <div class="kw">business operating system</div>
+            <div class="spoke-meta">
+              <span class="vol">1,600/mo</span>
+              <span class="words">3,500 words</span>
+            </div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ Write first — all spokes link here</div>
+            <div class="uk-badge">UK</div>
+            <div class="priority-flag p1">1</div>
+          </div>
+        </div>
+
+        <div class="section-label">Cluster Spokes</div>
+        <div class="spokes-grid">
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS Core</span>
+            <h4>What Is a Business Operating System?</h4>
+            <div class="kw">what is a business operating system</div>
+            <div class="spoke-meta"><span class="vol">880/mo</span><span class="words">1,100w</span></div>
+            <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+            <div class="priority-flag done">✓</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS Core</span>
+            <h4>The Hidden Cost of Not Having a Business Operating System</h4>
+            <div class="kw">cost of poor business execution</div>
+            <div class="spoke-meta"><span class="vol">480/mo</span><span class="words">1,200w</span></div>
+            <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+            <div class="priority-flag done">✓</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS Comparison</span>
+            <h4>Why We're the EOS Alternative Built for UK Businesses</h4>
+            <div class="kw">EOS alternative · EOS alternative UK</div>
+            <div class="spoke-meta"><span class="vol">720/mo</span><span class="words">2,000w</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — HIGH PRIORITY</div>
+            <div class="uk-badge">UK</div>
+            <div class="priority-flag p1">3</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS How-To</span>
+            <h4>How to Build a Business Operating System: Step-by-Step</h4>
+            <div class="kw">how to build a business operating system</div>
+            <div class="spoke-meta"><span class="vol">390/mo</span><span class="words">1,800w</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+            <div class="priority-flag p3">9</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#1e3a5f;color:#60a5fa;">BOS Examples</span>
+            <h4>Business Operating System Examples: 5 Real-World Models</h4>
+            <div class="kw">business operating system examples</div>
+            <div class="spoke-meta"><span class="vol">260/mo</span><span class="words">1,600w</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+            <div class="priority-flag p3">10</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PILLAR 2: 90-Day Planning -->
+      <div class="pillar-section" style="border-color:#f97316;">
+        <div class="pillar-header">
+          <div>
+            <div class="pillar-badge"><span>Pillar 2</span></div>
+            <div class="pillar-title" style="color:#fff;">90-Day Planning Cluster</div>
+            <div class="pillar-kw">Head keyword: "90-day planning framework" · ~1,200/mo</div>
+            <div class="pillar-meta">
+              <span class="meta-chip">5 posts</span>
+              <span class="meta-chip">3 live</span>
+              <span class="meta-chip">2 needed</span>
+            </div>
+          </div>
+          <span class="status-badge status-needed">★ NEW PILLAR PAGE</span>
+        </div>
+
+        <div class="section-label">Pillar Page</div>
+        <div class="spokes-grid" style="margin-bottom:20px;">
+          <div class="spoke-card" style="border-color:#f97316;">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">90-Day Hub</span>
+            <h4>The Complete 90-Day Planning Framework Guide</h4>
+            <div class="kw">90-day planning framework · quarterly planning framework</div>
+            <div class="spoke-meta"><span class="vol">1,200/mo</span><span class="words">3,000 words</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ Write second — all spokes link here</div>
+            <div class="uk-badge">UK</div>
+            <div class="priority-flag p1">2</div>
+          </div>
+        </div>
+
+        <div class="section-label">Cluster Spokes</div>
+        <div class="spokes-grid">
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">90-Day Goals</span>
+            <h4>How to Create 90-Day Business Goals That Actually Get Done</h4>
+            <div class="kw">how to create 90-day business goals</div>
+            <div class="spoke-meta"><span class="vol">720/mo</span><span class="words">1,300w</span></div>
+            <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+            <div class="priority-flag done">✓</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">Framework Deep</span>
+            <h4>The Proven 90-Day Planning Framework</h4>
+            <div class="kw">proven 90-day planning framework</div>
+            <div class="spoke-meta"><span class="vol">1,200/mo</span><span class="words">1,100w</span></div>
+            <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+            <div class="priority-flag done">✓</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">Annual Planning</span>
+            <h4>Why Annual Business Planning Fails (And What to Do Instead)</h4>
+            <div class="kw">why annual business planning fails</div>
+            <div class="spoke-meta"><span class="vol">390/mo</span><span class="words">1,150w</span></div>
+            <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+            <div class="priority-flag done">✓</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">Template</span>
+            <h4>The 90-Day Business Plan Template (Free Download)</h4>
+            <div class="kw">90-day business plan template</div>
+            <div class="spoke-meta"><span class="vol">650/mo</span><span class="words">1,400w</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+            <div class="priority-flag p3">11</div>
+          </div>
+          <div class="spoke-card">
+            <span class="cluster-tag" style="background:#431407;color:#f97316;">Execution Rhythm</span>
+            <h4>Quarterly Operating Rhythm: Build Your Execution Cadence</h4>
+            <div class="kw">quarterly operating rhythm</div>
+            <div class="spoke-meta"><span class="vol">260/mo</span><span class="words">1,400w</span></div>
+            <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+            <div class="priority-flag p3">14</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-col: Comparisons + Software -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+        <!-- Cluster: Comparisons -->
+        <div style="background:#1e293b;border:1px solid #7c3aed;padding:20px;">
+          <div class="pillar-badge" style="background:#7c3aed;margin-bottom:12px;"><span style="color:white;">Framework Comparisons</span></div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:16px;">Target: buyers comparing frameworks · High commercial intent</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#2e1065;color:#a78bfa;">Comparison Hub</span>
+              <h4>1:90 Align vs EOS vs OKRs vs Agile vs Monday.com</h4>
+              <div class="kw">business framework comparison</div>
+              <div class="spoke-meta"><span class="vol">1,200/mo</span><span class="words">2,500w</span></div>
+              <div class="status-badge status-upgrade" style="font-size:10px;margin-top:8px;">↑ UPGRADE /comparison.html</div>
+              <div class="priority-flag p2">7</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#2e1065;color:#a78bfa;">OKR vs 90-Day</span>
+              <h4>OKR Alternative: The Case for 90-Day Execution Cycles</h4>
+              <div class="kw">OKR alternative</div>
+              <div class="spoke-meta"><span class="vol">1,400/mo</span><span class="words">1,800w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 1</div>
+              <div class="priority-flag p1">4</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#2e1065;color:#a78bfa;">Framework vs</span>
+              <h4>EOS vs OKRs vs 1:90 Align: Which Framework Wins?</h4>
+              <div class="kw">EOS vs OKRs</div>
+              <div class="spoke-meta"><span class="vol">880/mo</span><span class="words">2,000w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+              <div class="priority-flag p3">15</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cluster: Software -->
+        <div style="background:#1e293b;border:1px solid #059669;padding:20px;">
+          <div class="pillar-badge" style="background:#059669;margin-bottom:12px;"><span style="color:white;">Software Comparisons</span></div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:16px;">Target: software buyers · Direct revenue impact</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#052e16;color:#4ade80;">Pillar 3</span>
+              <h4>Strategy Execution Software: 1:90 Align vs The Field</h4>
+              <div class="kw">strategy execution software · strategic planning software UK</div>
+              <div class="spoke-meta"><span class="vol">2,400/mo</span><span class="words">2,500w</span></div>
+              <div class="status-badge status-upgrade" style="font-size:10px;margin-top:8px;">↑ UPGRADE /software.html</div>
+              <div class="uk-badge">UK</div>
+              <div class="priority-flag p1">5</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#052e16;color:#4ade80;">Best-Of</span>
+              <h4>Best Business Planning Software UK (2026)</h4>
+              <div class="kw">best business planning software UK</div>
+              <div class="spoke-meta"><span class="vol">720/mo</span><span class="words">2,500w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 2</div>
+              <div class="uk-badge">UK</div>
+              <div class="priority-flag p2">6</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#052e16;color:#4ade80;">vs Monday.com</span>
+              <h4>Monday.com vs 1:90 Align: Beyond Task Management</h4>
+              <div class="kw">Monday.com alternative for strategy</div>
+              <div class="spoke-meta"><span class="vol">1,200/mo</span><span class="words">1,500w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 2</div>
+              <div class="priority-flag p2">8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-col: Team + Coaching -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+        <!-- Cluster: Team -->
+        <div style="background:#1e293b;border:1px solid #dc2626;padding:20px;">
+          <div class="pillar-badge" style="background:#dc2626;margin-bottom:12px;"><span style="color:white;">Team & Operations</span></div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:16px;">Target: team leaders, managers, ops directors</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#450a0a;color:#f87171;">Accountability</span>
+              <h4>How to Hold Your Team Accountable Without Micromanaging</h4>
+              <div class="kw">team accountability without micromanaging</div>
+              <div class="spoke-meta"><span class="vol">480/mo</span><span class="words">1,200w</span></div>
+              <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+              <div class="priority-flag done">✓</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#450a0a;color:#f87171;">Capacity</span>
+              <h4>Task-Based Capacity Planning & Workload Management</h4>
+              <div class="kw">capacity planning workload management</div>
+              <div class="spoke-meta"><span class="vol">720/mo</span><span class="words">1,200w</span></div>
+              <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+              <div class="priority-flag done">✓</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#450a0a;color:#f87171;">Daily Standup</span>
+              <h4>How to Run a 15-Minute Daily Standup That Actually Works</h4>
+              <div class="kw">daily standup best practices</div>
+              <div class="spoke-meta"><span class="vol">390/mo</span><span class="words">1,400w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+              <div class="priority-flag p3">13</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cluster: Coaching -->
+        <div style="background:#1e293b;border:1px solid #d97706;padding:20px;">
+          <div class="pillar-badge" style="background:#d97706;margin-bottom:12px;"><span style="color:white;">Coaching & Certification</span></div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:16px;">Target: coaches, consultants, aspiring business coaches UK</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#431407;color:#fb923c;">Certification</span>
+              <h4>Why Our Coach Certification Includes a Mini-MBA in Execution</h4>
+              <div class="kw">business coaching certification UK</div>
+              <div class="spoke-meta"><span class="vol">1,600/mo</span><span class="words">1,200w</span></div>
+              <div class="status-badge status-published" style="font-size:10px;margin-top:8px;">✓ Published</div>
+              <div class="priority-flag done">✓</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#431407;color:#fb923c;">Become a Coach</span>
+              <h4>How to Become a Business Coach in the UK</h4>
+              <div class="kw">become a business coach UK</div>
+              <div class="spoke-meta"><span class="vol">880/mo</span><span class="words">1,500w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+              <div class="priority-flag p3">13</div>
+            </div>
+            <div class="spoke-card">
+              <span class="cluster-tag" style="background:#431407;color:#fb923c;">Systemise UK</span>
+              <h4>How to Systemise and Scale Your Business (UK Guide)</h4>
+              <div class="kw">systemise business UK</div>
+              <div class="spoke-meta"><span class="vol">590/mo</span><span class="words">1,600w</span></div>
+              <div class="status-badge status-needed" style="font-size:10px;margin-top:8px;">★ NEW — Phase 3</div>
+              <div class="uk-badge">UK</div>
+              <div class="priority-flag p3">12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-section">
+        <h3>Cluster Build Progress</h3>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>BOS Cluster (5 posts)</span><span style="color:#f97316;">2/5 live (40%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:40%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>90-Day Planning (5 posts)</span><span style="color:#f97316;">3/5 live (60%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:60%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>Framework Comparisons (3 posts)</span><span style="color:#f97316;">1/3 live (33%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:33%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>Software Comparisons (3 posts)</span><span style="color:#f97316;">0/3 live (0%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>Team & Operations (3 posts)</span><span style="color:#f97316;">2/3 live (67%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:67%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-label"><span>Coaching & Certification (3 posts)</span><span style="color:#f97316;">1/3 live (33%)</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:33%;"></div></div>
+        </div>
+        <div class="progress-bar-wrap" style="margin-top:20px;">
+          <div class="progress-label"><span style="font-weight:700;color:#f97316;">OVERALL (22 content pieces)</span><span style="color:#f97316;">8/22 (36%)</span></div>
+          <div class="progress-bar" style="height:12px;"><div class="progress-fill" style="width:36%;"></div></div>
+        </div>
+      </div>
+
+      <!-- Competitor Gaps -->
+      <div class="gap-analysis">
+        <h3>🎯 UK Competitor Gaps — Win These First</h3>
+        <div class="gap-grid">
+          <div class="gap-card">
+            <div class="gap-title">🇬🇧 "EOS alternative UK"</div>
+            <div class="gap-desc">All current top-10 results are US-based (EOS Worldwide, Ninety.io, Bloom Growth). A UK-native guide wins this immediately with local context.</div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-title">🇬🇧 "strategy execution software UK"</div>
+            <div class="gap-desc">Comparison articles don't address UK pricing (GBP), GDPR, or UK SME terminology. 1:90 Align can own the UK-specific angle.</div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-title">💡 "OKR alternative 90-day"</div>
+            <div class="gap-desc">No piece connects OKR frustration specifically to 90-day execution cycles. This is a genuinely blue-ocean angle with 1,400/mo search volume.</div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-title">💡 "business coaching + execution framework"</div>
+            <div class="gap-desc">All UK coaching certification content is about ICF/ILM credentials. No competitor covers execution methodology + certification. 1:90's mini-MBA angle is unique.</div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-title">🎯 "business operating system examples"</div>
+            <div class="gap-desc">Informational query with good volume (~260/mo) where existing content is weak and fragmented. Easy to rank with quality examples piece.</div>
+          </div>
+          <div class="gap-card">
+            <div class="gap-title">🎯 "quarterly planning template"</div>
+            <div class="gap-desc">Template/download queries have high conversion intent. Offering a free 90-day planning template converts search traffic to leads.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div style="background:#0f172a;padding:20px 32px;border-top:1px solid #1e293b;font-size:11px;color:#475569;display:flex;justify-content:space-between;">
+  <span>1:90 Align Content Cluster Map · Generated 29 May 2026</span>
+  <span>Method: SERP Overlap Clustering · 50 keywords · 6 clusters · 22 total content pieces</span>
+</div>
+
+</body>
+</html>

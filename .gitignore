@@ -4,3 +4,7 @@
 *.swo
 .env
 .env.*
+
+# Internal strategy docs & guide source — not for the public repo or live site
+.strategy/
+guides-src/

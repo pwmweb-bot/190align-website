@@ -49,8 +49,10 @@ mirror --reverse --delete --verbose \
   --exclude ^\.git/ \
   --exclude ^\.github/ \
   --exclude ^\.claude/ \
+  --exclude ^\.strategy/ \
   --exclude ^content-strategy/ \
   --exclude ^seo-audit/ \
+  --exclude ^guides-src/ \
   --exclude ^deploy\.sh \
   --exclude ^\.env \
   --exclude ^\.DS_Store \

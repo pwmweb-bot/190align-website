@@ -181,16 +181,36 @@ if (!$sent) {
 }
 
 // Also send an auto-reply to the sender
-send_autoreply($name, $email, $form_source);
+send_autoreply($name, $email, $form_source, $is_lead_magnet);
 
 json_success();
 
 
 // ── Auto-reply ───────────────────────────────────────────────────────────────
 
-function send_autoreply(string $name, string $email, string $form_source): void
+function send_autoreply(string $name, string $email, string $form_source, bool $is_lead_magnet = false): void
 {
     $first_name = explode(' ', $name)[0];
+
+    if ($is_lead_magnet) {
+        $subject  = "Your 90-Day Planning Guide — 1:90 Align";
+        $text  = "Hi {$first_name},\n\n";
+        $text .= "Thanks for downloading the 90-Day Planning Guide. Here's your copy:\n";
+        $text .= "https://190align.com/downloads/90-day-planning-guide.pdf\n\n";
+        $text .= "It walks you through the full Arc -> Wave -> Milestone -> Task method, step by step — everything you need to run your first 90-day cycle.\n\n";
+        $text .= "When you're ready to put it into practice, we help UK business owners install the whole system. Book a free 15-minute call anytime:\n";
+        $text .= "https://calendly.com/190align/15min\n\n";
+        $text .= "Best,\nThe 1:90 Align Team\n\n";
+        $text .= "---\n1:90 Align Ltd\n+44 742 820 9054\ncontact@190align.com\nhttps://190align.com\n";
+
+        $headers  = "From: " . FROM_NAME . " <" . FROM_EMAIL . ">\r\n";
+        $headers .= "Reply-To: " . TO_EMAIL . "\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        @mail($email, $subject, $text, $headers);
+        return;
+    }
+
     $subject    = "Thanks for getting in touch — 1:90 Align";
 
     $text = "Hi {$first_name},\n\n";

@@ -96,6 +96,11 @@ $message = sanitise($body['message'] ?? $body['contactMessage'] ?? '');
 $raw_interests = $body['interests'] ?? [];
 $interests = array_map('sanitise', (array) $raw_interests);
 
+// Lead-magnet / guide downloads only need name + email (lightweight capture)
+$is_lead_magnet = (stripos($form_source, 'guide') !== false)
+    || (stripos($form_source, 'download') !== false)
+    || !empty($body['lead_magnet']);
+
 // Validation
 if (empty($name)) {
     $errors[] = 'Name is required.';
@@ -103,11 +108,13 @@ if (empty($name)) {
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'A valid email address is required.';
 }
-if (empty($company)) {
-    $errors[] = 'Company name is required.';
-}
-if (empty($phone)) {
-    $errors[] = 'Phone number is required.';
+if (!$is_lead_magnet) {
+    if (empty($company)) {
+        $errors[] = 'Company name is required.';
+    }
+    if (empty($phone)) {
+        $errors[] = 'Phone number is required.';
+    }
 }
 
 if (!empty($errors)) {

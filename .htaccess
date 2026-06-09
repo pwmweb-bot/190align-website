@@ -99,7 +99,7 @@
 # ── Block Sensitive Files ────────────────────────────────────
 # Prevent access to files that should never be public
 
-<FilesMatch "(^\.env|^\.git|^\.htpasswd|^\.DS_Store|\.sql$|\.log$|\.bak$|\.swp$)">
+<FilesMatch "(^\.env|^\.git|^\.htpasswd|^\.DS_Store|\.sql$|\.log$|\.bak$|\.swp$|\.sh$|^DEPLOY\.md$)">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>

@@ -1,69 +1,48 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────
-# 190align.com — Direct SFTP Deploy Script
-# Usage:  ./deploy.sh              (sync all changed files)
-#         ./deploy.sh blog/        (sync only blog/ directory)
-#         ./deploy.sh index.html   (sync single file)
+# 190align.com — Deploy via SSH git-sync
+#
+# The live site serves from a git checkout on the 20i server:
+#   /home/virtual/vps-7c189f/3/35236011d5/190align-website
+#
+# Deploy = push to GitHub, then SSH in and hard-sync the docroot
+# to origin/main. (The old SFTP method uploaded to a dead
+# public_html the live site never reads — do NOT revive it.)
+#
+# Usage:  ./deploy.sh            push current commit(s) + deploy
+#         ./deploy.sh --no-push  deploy whatever is already on origin/main
 # ─────────────────────────────────────────────────────────
 
-SFTP_HOST="sftp.lhr.stackcp.com"
-SFTP_PORT="10511"
-SFTP_USER="deploy@190align.com"
-SFTP_PASSWORD="KCFCJhyZQCMR3Wdz34XRcXZXQdQpmR1g"
+set -euo pipefail
+
+# ── Config ───────────────────────────────────────────────
+SSH_KEY="$HOME/.ssh/190align_20i"
+SSH_HOST="ssh.lhr.stackcp.com"
+SSH_PORT="39355"
+SSH_USER="190align.com"
+DOCROOT="/home/virtual/vps-7c189f/3/35236011d5/190align-website"
+BRANCH="main"
 
 # Colours
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-RED='\033[0;31m'
-NC='\033[0m'
+GREEN='\033[0;32m'; ORANGE='\033[0;33m'; RED='\033[0;31m'; NC='\033[0m'
 
-echo -e "${ORANGE}▶ 190align deploy — sftp.lhr.stackcp.com:10511${NC}"
+echo -e "${ORANGE}▶ 190align deploy — SSH git-sync to live docroot${NC}"
 
-# ── Single file or directory upload ─────────────────────
-if [ -n "$1" ]; then
-  TARGET="$1"
-  # Strip leading ./
-  TARGET="${TARGET#./}"
-  # Determine remote path (preserve directory structure)
-  REMOTE_DIR=$(dirname "/$TARGET")
-
-  echo -e "${ORANGE}  Uploading: ${TARGET}${NC}"
-
-  lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST":"$SFTP_PORT" <<EOF
-set sftp:auto-confirm yes
-set net:max-retries 3
-cd /
-$(if [ -d "$TARGET" ]; then echo "mirror --reverse --delete --verbose --exclude ^\.git/ \"$TARGET\" \"/$TARGET\""; else echo "put \"$TARGET\" -o \"/$TARGET\""; fi)
-bye
-EOF
-
-# ── Full mirror sync ─────────────────────────────────────
+# ── 1. Push to GitHub (unless --no-push) ─────────────────
+if [ "${1:-}" != "--no-push" ]; then
+  echo -e "${ORANGE}  Pushing ${BRANCH} to GitHub…${NC}"
+  git push origin "${BRANCH}"
 else
-  echo -e "${ORANGE}  Full sync — mirroring all changed files${NC}"
-
-  lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST":"$SFTP_PORT" <<EOF
-set sftp:auto-confirm yes
-set net:max-retries 3
-set net:reconnect-interval-base 5
-mirror --reverse --delete --verbose \
-  --exclude ^\.git/ \
-  --exclude ^\.github/ \
-  --exclude ^\.claude/ \
-  --exclude ^\.strategy/ \
-  --exclude ^content-strategy/ \
-  --exclude ^seo-audit/ \
-  --exclude ^guides-src/ \
-  --exclude ^deploy\.sh \
-  --exclude ^\.env \
-  --exclude ^\.DS_Store \
-  . /
-bye
-EOF
+  echo -e "${ORANGE}  Skipping push (--no-push) — deploying current origin/${BRANCH}${NC}"
 fi
 
-if [ $? -eq 0 ]; then
-  echo -e "${GREEN}✓ Deploy complete${NC}"
-else
-  echo -e "${RED}✗ Deploy failed — check SFTP credentials or connection${NC}"
-  exit 1
-fi
+LOCAL_SHA=$(git rev-parse --short "${BRANCH}")
+
+# ── 2. SSH in and hard-sync the docroot to origin/main ───
+echo -e "${ORANGE}  Syncing live docroot to origin/${BRANCH}…${NC}"
+ssh -i "${SSH_KEY}" -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20 \
+    -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" \
+    "cd '${DOCROOT}' && git fetch origin && git reset --hard origin/${BRANCH} && git rev-parse --short HEAD"
+
+echo -e "${GREEN}✓ Deploy complete — live docroot synced to ${LOCAL_SHA}${NC}"
+echo -e "${ORANGE}  Verify: https://190align.com/${NC}"

@@ -402,6 +402,7 @@ function buildZone(name, opts){
         (j-(rows-1)/2)*gap + (Math.random()-0.5)*gap*0.25
       );
       b.userData.zone = name; b.userData.baseY = b.position.y;
+      b.userData.height = h; b.userData.w = w; b.userData.d = d;
       g.add(b); buildings.push(b);
     }
   }
@@ -488,11 +489,11 @@ function focusZone(name){
   controls.autoRotate = false; controls.enabled = false;
   hoverLabel.style.opacity = 0; document.body.style.cursor='default';
 
-  // dim others, highlight selected
+  // Calm the selected district (subtle highlight) so the glowing cascade pops;
+  // dim the others right down.
   Object.keys(zones).forEach(z=>{
-    zones[z].buildings.forEach(b=>{ b.material = (z===name)?activeMat:baseMat; });
+    zones[z].buildings.forEach(b=>{ b.material = (z===name)?hoverMat:baseMat; });
     gsap.to(zones[z].label.material,{opacity:(z===name)?1:0.0,duration:.4});
-    gsap.to(zones[z].group.position,{x: z===name? zones[z].center.x : zones[z].center.x + (zones[z].center.x)*0.0, duration:.6});
   });
 
   const c = zones[name].center;
@@ -501,7 +502,7 @@ function focusZone(name){
   const camDest = new THREE.Vector3(c.x+offset[0], offset[1], c.z+offset[2]);
 
   gsap.to(camera.position,{x:camDest.x,y:camDest.y,z:camDest.z,duration:1.4,ease:'power3.inOut',onUpdate:()=>camera.lookAt(camTarget)});
-  gsap.to(controls.target,{x:camTarget.x,y:camTarget.y,z:camTarget.z,duration:1.4,ease:'power3.inOut',onComplete:()=>{isAnimating=false;}});
+  gsap.to(controls.target,{x:camTarget.x,y:camTarget.y,z:camTarget.z,duration:1.4,ease:'power3.inOut',onComplete:()=>{ isAnimating=false; buildCascade(name); }});
 
   // hide intro, show panel + controls
   gsap.to('#intro',{opacity:0,y:20,duration:.4,onComplete:()=>document.getElementById('intro').style.display='none'});
@@ -511,6 +512,7 @@ function focusZone(name){
 
 function resetView(){
   if(isAnimating) return; isAnimating = true;
+  clearCascade();
   document.getElementById('panel').classList.remove('open');
   document.getElementById('controls').classList.remove('show');
   Object.keys(zones).forEach(z=>{
@@ -523,6 +525,115 @@ function resetView(){
   }});
   const intro = document.getElementById('intro'); intro.style.display='block';
   gsap.fromTo('#intro',{opacity:0,y:20},{opacity:1,y:0,duration:.5,delay:.6});
+}
+
+/* ────────────────────────────────────────────────────────────
+   3D FRAMEWORK CASCADE — Arc → Wave → Milestone → Task, drawn
+   onto the tallest tower, with alignment lines from every other
+   building converging on the one Arc. The literal "here's how it
+   works for you" moment.
+──────────────────────────────────────────────────────────── */
+let cascade = null;
+const ARC_COLOR = 0xf97316;
+function glowMat(){ return new THREE.MeshStandardMaterial({ color:ARC_COLOR, emissive:ARC_COLOR, emissiveIntensity:1.15, roughness:0.4, metalness:0, transparent:true, opacity:1 }); }
+
+function disposeGroup(g){
+  g.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material){ (Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose()); } });
+}
+function clearCascade(){
+  if(!cascade) return;
+  const g = cascade; cascade = null;
+  (g.userData.loops||[]).forEach(t=>t.kill());
+  g.traverse(o=>{ if(o.material){ gsap.killTweensOf(o.scale); gsap.killTweensOf(o.material); gsap.to(o.material,{opacity:0,duration:0.35}); } });
+  setTimeout(()=>{ scene.remove(g); disposeGroup(g); }, 380);
+}
+
+function buildCascade(name){
+  if(cascade) clearCascade();
+  const z = zones[name];
+  if(!z || !z.buildings.length) return;
+
+  // Hero = the tallest tower in the district = the Arc tower
+  let hero = z.buildings[0];
+  z.buildings.forEach(b=>{ if(b.userData.height > hero.userData.height) hero = b; });
+  const hx = z.center.x + hero.position.x;
+  const hz = z.center.z + hero.position.z;
+  const h  = hero.userData.height;
+  const roofY = hero.position.y + h/2;
+  const baseY = hero.position.y - h/2;
+  const ringR = Math.max(hero.userData.w, hero.userData.d) * 0.92;
+
+  const g = new THREE.Group(); g.userData.loops = []; cascade = g; scene.add(g);
+  const beaconPos = new THREE.Vector3(hx, roofY + Math.max(2.4, h*0.12), hz);
+
+  // ARC — beacon at the roof
+  const beacon = new THREE.Mesh(new THREE.OctahedronGeometry(Math.max(1.3, ringR*0.5), 0), glowMat());
+  beacon.position.copy(beaconPos); beacon.scale.setScalar(0.001); g.add(beacon);
+
+  // Spine down the tower (grows downward from the roof)
+  const spineH = roofY - baseY;
+  const spineGeo = new THREE.CylinderGeometry(0.16,0.16, spineH, 8); spineGeo.translate(0,-spineH/2,0);
+  const spine = new THREE.Mesh(spineGeo, glowMat());
+  spine.position.set(hx, roofY, hz); spine.scale.y = 0.001; g.add(spine);
+
+  // WAVE — three rings down the tower (three 30-day sprints)
+  const waveYs = [roofY - spineH*0.28, roofY - spineH*0.55, roofY - spineH*0.82];
+  const waveRings = [];
+  waveYs.forEach(y=>{
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(ringR, 0.15, 8, 44), glowMat());
+    ring.rotation.x = Math.PI/2; ring.position.set(hx,y,hz); ring.scale.setScalar(0.001);
+    g.add(ring); waveRings.push(ring);
+  });
+
+  // MILESTONE — dated, owned proof-points on each Wave
+  const milestones = [];
+  waveYs.forEach(y=>{
+    for(let k=0;k<3;k++){
+      const a = (k/3)*Math.PI*2 + 0.5;
+      const m = new THREE.Mesh(new THREE.SphereGeometry(Math.max(0.32, ringR*0.13), 12, 12), glowMat());
+      m.position.set(hx+Math.cos(a)*ringR, y, hz+Math.sin(a)*ringR); m.scale.setScalar(0.001);
+      g.add(m); milestones.push(m);
+    }
+  });
+
+  // TASK — daily work, lights at street level
+  const tasks = [];
+  for(let k=0;k<12;k++){
+    const a = Math.random()*Math.PI*2, r = 1 + Math.random()*ringR*1.5;
+    const t = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 8), glowMat());
+    t.position.set(hx+Math.cos(a)*r, baseY+0.5, hz+Math.sin(a)*r); t.scale.setScalar(0.001);
+    g.add(t); tasks.push(t);
+  }
+
+  // ALIGNMENT LINES — every other building points to the one Arc
+  const lines = [];
+  z.buildings.forEach(b=>{
+    if(b===hero) return;
+    const start = new THREE.Vector3(z.center.x+b.position.x, b.position.y + b.userData.height/2, z.center.z+b.position.z);
+    const geo = new THREE.BufferGeometry().setFromPoints([start, start.clone()]);
+    const line = new THREE.Line(geo, new THREE.LineBasicMaterial({ color:ARC_COLOR, transparent:true, opacity:0 }));
+    line.userData = { start, end: beaconPos.clone() };
+    g.add(line); lines.push(line);
+  });
+
+  // ── Reveal sequence ──
+  const tl = gsap.timeline();
+  tl.to(spine.scale, { y:1, duration:0.5, ease:'power2.out' });
+  tl.to(beacon.scale, { x:1,y:1,z:1, duration:0.45, ease:'back.out(2)' }, '-=0.15');
+  tl.to(waveRings.map(r=>r.scale), { x:1,y:1,z:1, duration:0.4, stagger:0.13, ease:'back.out(1.7)' }, '-=0.1');
+  tl.to(milestones.map(m=>m.scale), { x:1,y:1,z:1, duration:0.3, stagger:0.04, ease:'back.out(2)' }, '-=0.25');
+  tl.to(tasks.map(t=>t.scale), { x:1,y:1,z:1, duration:0.25, stagger:0.025 }, '-=0.2');
+  lines.forEach((line,i)=>{
+    const o = { t:0 };
+    tl.to(o, { t:1, duration:0.45, ease:'power2.out', onUpdate:()=>{
+      const p = line.userData.start.clone().lerp(line.userData.end, o.t);
+      line.geometry.setFromPoints([line.userData.start, p]);
+    }}, i===0 ? '-=0.1' : '<0.06');
+    tl.to(line.material, { opacity:0.5, duration:0.3 }, '<');
+  });
+  // gentle continuous life: beacon rotates + breathes
+  g.userData.loops.push(gsap.to(beacon.rotation, { y:'+=6.283', duration:7, repeat:-1, ease:'none' }));
+  tl.call(()=>{ g.userData.loops.push(gsap.to(beacon.scale, { x:1.22,y:1.22,z:1.22, duration:1.2, repeat:-1, yoyo:true, ease:'sine.inOut' })); });
 }
 
 /* ── Populate the detail panel ── */

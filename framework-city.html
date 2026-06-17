@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Alignment City — How 1:90 Align Scales With You</title>
+<meta name="description" content="An interactive look at how the 1:90 Align framework helps businesses of every size — from small teams to enterprise — align strategy, people and resources." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Neumorphic dark-slate base + brand orange accent */
+    --bg:#22262e;
+    --bg-light:#2a2f39;
+    --shadow-dark:#191c22;
+    --shadow-light:#2d333f;
+    --text:#e7ecf3;
+    --text-dim:#9aa4b2;
+    --orange:#f97316;
+    --orange-soft:#fb923c;
+    --navy:#172554;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;}
+  canvas{display:block;}
+  #app{position:fixed;inset:0;}
+
+  h1,h2,h3{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:1;}
+
+  /* ── Neumorphic primitives ── */
+  .neu{background:var(--bg);border-radius:22px;box-shadow:9px 9px 18px var(--shadow-dark),-9px -9px 18px var(--shadow-light);}
+  .neu-inset{background:var(--bg);border-radius:18px;box-shadow:inset 6px 6px 12px var(--shadow-dark),inset -6px -6px 12px var(--shadow-light);}
+  .neu-btn{background:var(--bg);border:none;color:var(--text);border-radius:16px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.06em;font-weight:800;
+    box-shadow:6px 6px 12px var(--shadow-dark),-6px -6px 12px var(--shadow-light);transition:box-shadow .18s ease,color .18s ease,transform .18s ease;}
+  .neu-btn:hover{color:var(--orange);}
+  .neu-btn:active{box-shadow:inset 5px 5px 10px var(--shadow-dark),inset -5px -5px 10px var(--shadow-light);transform:translateY(1px);}
+  .neu-btn.accent{color:var(--navy);background:var(--orange);box-shadow:6px 6px 14px var(--shadow-dark),-4px -4px 10px var(--shadow-light);}
+  .neu-btn.accent:hover{color:#fff;}
+
+  /* ── Brand mark ── */
+  #brand{position:absolute;top:26px;left:28px;z-index:20;display:flex;align-items:center;gap:14px;}
+  .logo-badge{background:var(--orange);padding:7px 14px;transform:skewX(-12deg);box-shadow:5px 5px 12px var(--shadow-dark);}
+  .logo-badge span{display:inline-block;transform:skewX(12deg);color:var(--navy);font-weight:900;font-size:22px;font-family:'Barlow Condensed',sans-serif;letter-spacing:-1px;}
+  #brand .tag{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;font-weight:600;}
+
+  /* ── Intro card ── */
+  #intro{position:absolute;left:50%;bottom:42px;transform:translateX(-50%);z-index:15;width:min(680px,92vw);padding:26px 32px;text-align:center;}
+  #intro h1{font-size:34px;margin-bottom:8px;}
+  #intro h1 b{color:var(--orange);font-weight:900;}
+  #intro p{color:var(--text-dim);font-size:15px;line-height:1.6;max-width:560px;margin:0 auto 14px;}
+  #intro .positioning{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:13px;font-weight:700;color:var(--text);margin-bottom:18px;}
+  #intro .positioning b{color:var(--orange);}
+  #intro .pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .pill{padding:13px 22px;font-size:14px;display:flex;align-items:center;gap:9px;}
+  .pill .dot{width:10px;height:10px;border-radius:50%;box-shadow:inset 2px 2px 4px rgba(0,0,0,.4);}
+  .pill .dot.s{background:var(--orange-soft);} .pill .dot.m{background:var(--orange);} .pill .dot.e{background:#ea580c;}
+
+  /* ── Hover label ── */
+  #hoverlabel{position:absolute;z-index:12;pointer-events:none;padding:8px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:14px;color:var(--orange);opacity:0;transform:translate(-50%,-130%);transition:opacity .15s ease;white-space:nowrap;}
+
+  /* ── Detail panel ── */
+  #panel{position:absolute;top:0;right:0;height:100%;width:min(460px,100vw);z-index:30;padding:34px 34px 34px;display:flex;flex-direction:column;
+    border-radius:34px 0 0 34px;transform:translateX(105%);transition:transform .6s cubic-bezier(.16,1,.3,1);overflow-y:auto;}
+  #panel.open{transform:translateX(0);}
+  #panel::-webkit-scrollbar{width:8px;} #panel::-webkit-scrollbar-thumb{background:var(--shadow-dark);border-radius:8px;}
+  #panel .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:10px;}
+  #panel .size-dot{width:12px;height:12px;border-radius:50%;}
+  #panel h2{font-size:40px;margin-bottom:6px;}
+  #panel .sub{color:var(--text-dim);font-size:14px;margin-bottom:22px;line-height:1.5;}
+  .block{padding:18px 20px;margin-bottom:16px;border-radius:18px;}
+  .block h3{font-size:16px;letter-spacing:.05em;margin-bottom:10px;color:var(--text);}
+  .block h3 .ic{color:var(--orange);margin-right:7px;}
+  .block p{font-size:13.5px;line-height:1.6;color:var(--text-dim);}
+  .roles{display:flex;flex-wrap:wrap;gap:8px;}
+  .role{font-size:12px;padding:7px 12px;border-radius:11px;color:var(--text);box-shadow:inset 3px 3px 6px var(--shadow-dark),inset -3px -3px 6px var(--shadow-light);}
+  /* framework ladder */
+  .ladder{display:flex;flex-direction:column;gap:8px;}
+  .rung{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:13px;box-shadow:4px 4px 9px var(--shadow-dark),-4px -4px 9px var(--shadow-light);}
+  .rung .lvl{font-family:'Barlow Condensed',sans-serif;font-weight:900;text-transform:uppercase;font-size:14px;color:var(--orange);width:78px;flex-shrink:0;letter-spacing:.04em;}
+  .rung .d{font-size:12.5px;color:var(--text-dim);line-height:1.45;}
+  .outcome{padding:16px 20px;border-radius:16px;background:linear-gradient(135deg,var(--orange),#ea580c);color:var(--navy);margin-bottom:18px;}
+  .outcome b{display:block;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-size:13px;letter-spacing:1.5px;margin-bottom:4px;opacity:.8;}
+  .outcome p{font-size:15px;font-weight:600;line-height:1.4;}
+  .panel-cta{display:flex;gap:12px;margin-top:auto;position:sticky;bottom:-34px;background:var(--bg);padding:16px 0 18px;z-index:3;box-shadow:0 -14px 18px -8px var(--bg);}
+  .panel-cta a{flex:1;text-decoration:none;text-align:center;padding:15px;font-size:14px;}
+  #closepanel{position:absolute;top:22px;right:24px;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;}
+
+  /* ── Reset / controls ── */
+  #controls{position:absolute;bottom:30px;left:28px;z-index:20;display:flex;gap:12px;opacity:0;transform:translateY(10px);transition:opacity .4s,transform .4s;pointer-events:none;}
+  #controls.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+  #controls .neu-btn{padding:13px 20px;font-size:13px;}
+
+  /* loading */
+  #loader{position:absolute;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:var(--bg);}
+  #loader .ring{width:54px;height:54px;border-radius:50%;box-shadow:inset 5px 5px 10px var(--shadow-dark),inset -5px -5px 10px var(--shadow-light);position:relative;}
+  #loader .ring::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:3px solid transparent;border-top-color:var(--orange);animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  #loader p{color:var(--text-dim);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:3px;font-size:13px;}
+
+  @media (max-width:560px){
+    #intro{bottom:20px;padding:20px;} #intro h1{font-size:26px;}
+    #panel{width:100vw;border-radius:0;padding:26px 22px;}
+    #brand .tag{display:none;}
+    #controls{bottom:auto;top:84px;left:20px;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- Brand -->
+<div id="brand">
+  <div class="logo-badge"><span>1:90</span></div>
+  <div class="tag">The Alignment City</div>
+</div>
+
+<!-- Loader -->
+<div id="loader"><div class="ring"></div><p>Building the city…</p></div>
+
+<!-- Hover label -->
+<div id="hoverlabel"></div>
+
+<!-- Intro -->
+<div id="intro" class="neu">
+  <h1>WHICH ONE IS <b>YOU?</b></h1>
+  <p>Every business — from a five-person team to a thousand-person enterprise — runs on the same thing: getting strategy to actually happen. Click your size and see how one framework aligns it all.</p>
+  <p class="positioning">The <b>UK</b> Business Operating System — not another US framework, not another task list.</p>
+  <div class="pills">
+    <button class="pill neu-btn" data-zone="small"><span class="dot s"></span>Small business</button>
+    <button class="pill neu-btn" data-zone="medium"><span class="dot m"></span>Medium business</button>
+    <button class="pill neu-btn" data-zone="enterprise"><span class="dot e"></span>Enterprise</button>
+  </div>
+</div>
+
+<!-- Controls -->
+<div id="controls">
+  <button class="neu-btn" id="resetBtn">↑ Back to the city</button>
+</div>
+
+<!-- Detail panel -->
+<div id="panel" class="neu">
+  <button id="closepanel" class="neu-btn">✕</button>
+  <div class="eyebrow"><span class="size-dot" id="p-dot"></span><span id="p-eyebrow">Small Business</span></div>
+  <h2 id="p-title">The Owner-Operator</h2>
+  <p class="sub" id="p-sub"></p>
+
+  <div class="block neu-inset">
+    <h3><span class="ic">●</span>Who's in the room</h3>
+    <div class="roles" id="p-roles"></div>
+  </div>
+
+  <div class="block neu-inset">
+    <h3><span class="ic">▲</span>The problem</h3>
+    <p id="p-problem"></p>
+  </div>
+
+  <div style="margin-bottom:16px;">
+    <h3 style="font-size:15px;margin-bottom:12px;color:var(--text);"><span style="color:var(--orange);margin-right:7px;">◆</span>How the framework cascades</h3>
+    <div class="ladder" id="p-ladder"></div>
+  </div>
+
+  <div class="outcome"><b id="p-outcome-label">The result</b><p id="p-outcome"></p></div>
+
+  <div class="block neu-inset" style="margin-bottom:18px;">
+    <h3><span class="ic">⚙</span>Training + software</h3>
+    <p id="p-support"></p>
+  </div>
+
+  <div class="panel-cta">
+    <a href="pricing.html" class="neu-btn accent">See pricing</a>
+    <a href="https://calendly.com/190align/15min" target="_blank" rel="noopener" class="neu-btn">Book a call</a>
+  </div>
+</div>
+
+<!-- diagnostic error capture (surfaces module-level errors) -->
+<script>
+  window.__lastError=null;
+  addEventListener('error',e=>{window.__lastError=(e.message||'')+' @ '+(e.filename||'').split('/').pop()+':'+(e.lineno||'');});
+  addEventListener('unhandledrejection',e=>{window.__lastError='promise: '+((e.reason&&e.reason.message)||e.reason);});
+  // Safety fallback: never let the loader trap the user even if init stalls
+  addEventListener('load',()=>setTimeout(()=>{var l=document.getElementById('loader'); if(l&&getComputedStyle(l).opacity!=='0'){l.style.transition='opacity .5s';l.style.opacity='0';setTimeout(()=>l.style.display='none',500);}},2500));
+</script>
+
+<!-- three.js + gsap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* ────────────────────────────────────────────────────────────
+   CONTENT — the storytelling for each business size
+──────────────────────────────────────────────────────────── */
+const CONTENT = {
+  small: {
+    eyebrow:'Small Business · 1–15 people', dotColor:'#fb923c', title:'It All Runs Through You',
+    sub:'You’re the strategy, the sales team and the safety net — and the only place the plan exists is your head.',
+    roles:['Owner / Founder','Right-hand person','A couple of all-rounders','A first hire or two you’d love to delegate to'],
+    problem:'Sales, ops, hiring, the books, the fire that started ten minutes ago — it all routes through you. The plan never leaves your head, so nothing moves unless you push it. Take a 6-person agency: the founder knows exactly what the quarter needs, but it’s never written down, so the team waits on her for every call. That’s not a growth problem. It’s a can’t-step-away problem, and it caps the business at whatever one person can carry.',
+    ladder:[
+      ['Arc','The one thing that actually grows the business this quarter — picked, written down, and out of your head where the whole team can see it.'],
+      ['Wave','Three 30-day pushes, each ending in a checkpoint, so the goal is never “someday” — it’s this month, prove it, then the next.'],
+      ['Milestone','Clear, dated wins you can hand to someone else — the thing that finally lets you delegate without it bouncing straight back to you.'],
+      ['Task','The daily work, each linked up to a Milestone — so your people know what matters today without asking you first.'],
+    ],
+    outcomeLabel:'The result', outcome:'You take a week off and the business doesn’t stall — because it’s running on the plan, not on you, and growing past what one person could ever carry alone.',
+    support:'Built in the UK by an operator who’s actually run one — not a US franchise, and no £36k-a-year implementer to rent. You set your first Arc in a half-day, software quietly holds the plan so it’s not living in your head, and coaching teaches you the one move a stuck founder needs most: delegating through Milestones.'
+  },
+  medium: {
+    eyebrow:'Medium Business · 15–80 people', dotColor:'#f97316', title:'The Department Divide',
+    sub:'Real departments now — and quietly, each one has started running on its own version of the truth.',
+    roles:['Managing Director','Head of Sales','Head of Operations','Head of Finance','Team leads'],
+    problem:'You’ve crossed the line where one head can hold it all. Now Sales is selling what Ops can’t deliver, Finance is budgeting against numbers nobody agreed, and the priority you set at the top is a rumour by the time it reaches the floor. Every function forecasts off its own spreadsheet, so capacity collides instead of connecting. Everyone is busy. Nobody’s certain it adds up.',
+    ladder:[
+      ['Arc','One company-wide 90-day priority every department can name — not five competing plans, but one Arc the whole business is working to, top to floor.'],
+      ['Wave','Three 30-day sprints, where Sales, Ops and Finance hit the same checkpoint at the same moment — pacing one body of work, not three.'],
+      ['Milestone','Dated, owned Milestones every head can see — so when Sales commits, Ops has already counted the cost and Finance has already booked it.'],
+      ['Task','Daily work, each linked up to a Milestone, so every person can see how today connects to the company Arc — not just their own team’s.'],
+    ],
+    outcomeLabel:'The result', outcome:'Every department forecasts capacity off one shared plan instead of three rival ones — so what Sales promises, Ops can deliver, and Finance can see coming.',
+    support:'A facilitated rollout sets the Arc once — run by an operator who’s done this inside a real UK business, not a US-franchised implementer on a £36k retainer. Then every head and team lead learns to run the rhythm themselves, so it sticks without you renting a consultant forever — and the software keeps every function forecasting off the same Milestones.'
+  },
+  enterprise: {
+    eyebrow:'Enterprise · 80+ people', dotColor:'#ea580c', title:'Green Dashboards, Flat Number',
+    sub:'The board signs off the priority on Monday — and by Friday it means something different in every division.',
+    roles:['CEO / Board','Division leaders','Department managers','Team leads','Hundreds of contributors'],
+    problem:'The board agrees the priority. Re-told through five layers, it lands differently in every division — Sales chases one number, Ops chases another, Finance hears about both last. Every divisional dashboard reports green, and the company number still hasn’t moved. Leadership has no single source of truth for whether the strategy is actually shifting — only slide decks that say it is.',
+    ladder:[
+      ['Arc','One corporate Arc. Every division owns a named slice of it — same direction, no private versions invented on the way down.'],
+      ['Wave','Divisions run the Arc in three 30-day sprints, and every sprint checkpoint rolls up live into division and corporate views — not month-end decks.'],
+      ['Milestone','Dated, owned Milestones let managers forecast people and budget against real demand, layer by layer — so a capacity crunch shows up weeks early, not in the post-mortem.'],
+      ['Task','Every contributor’s daily work links straight up the chain to the corporate Arc — strategy you can trace from the board to the floor.'],
+    ],
+    outcomeLabel:'The result', outcome:'One operating system across every division — so each quarter the whole org can prove it moved one number, and the board’s priority reaches the frontline intact instead of dissolving on the way down.',
+    support:'We certify your own people as internal coaches, so the rhythm outlives any consultant. The software becomes the single source of truth across every division — UK-built and UK-hosted. A structured rollout embeds it layer by layer. Not a gated US franchise at £36k a year — a British operating system you own.'
+  }
+};
+
+/* ────────────────────────────────────────────────────────────
+   THREE.JS SCENE
+──────────────────────────────────────────────────────────── */
+const app = document.getElementById('app');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x22262e);
+scene.fog = new THREE.Fog(0x22262e, 60, 150);
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 500);
+const HOME_POS = new THREE.Vector3(34, 40, 44);
+const HOME_TGT = new THREE.Vector3(0, 0, 0);
+camera.position.copy(HOME_POS);
+
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+app.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.copy(HOME_TGT);
+controls.enableDamping = true; controls.dampingFactor = 0.08;
+controls.minPolarAngle = 0.25; controls.maxPolarAngle = Math.PI/2.35;
+controls.minDistance = 18; controls.maxDistance = 90;
+controls.enablePan = false; controls.autoRotate = true; controls.autoRotateSpeed = 0.45;
+
+/* ── Lighting (soft, neumorphic) ── */
+scene.add(new THREE.HemisphereLight(0x3a4150, 0x1a1d24, 0.9));
+const key = new THREE.DirectionalLight(0xfff1e6, 1.15);
+key.position.set(30, 50, 20); key.castShadow = true;
+key.shadow.mapSize.set(2048,2048);
+key.shadow.camera.near = 1; key.shadow.camera.far = 160;
+key.shadow.camera.left=-70; key.shadow.camera.right=70; key.shadow.camera.top=70; key.shadow.camera.bottom=-70;
+key.shadow.bias = -0.0004; key.shadow.radius = 6;
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xf97316, 0.25); rim.position.set(-30,20,-30); scene.add(rim);
+
+/* ── Ground: a big soft neumorphic panel ── */
+const groundGeo = new RoundedBoxGeometry(120, 4, 120, 6, 8);
+const groundMat = new THREE.MeshStandardMaterial({ color:0x262b34, roughness:0.95, metalness:0.0 });
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.position.y = -2; ground.receiveShadow = true; scene.add(ground);
+
+/* subtle inset plate to read as neumorphic recess */
+const plateGeo = new RoundedBoxGeometry(104, 1.2, 104, 5, 8);
+const plateMat = new THREE.MeshStandardMaterial({ color:0x20242b, roughness:1 });
+const plate = new THREE.Mesh(plateGeo, plateMat);
+plate.position.y = 0.2; plate.receiveShadow = true; scene.add(plate);
+
+/* ── Materials ── */
+const baseMat   = new THREE.MeshStandardMaterial({ color:0x2c323d, roughness:0.85, metalness:0.05 });
+const hoverMat  = new THREE.MeshStandardMaterial({ color:0x3a4150, roughness:0.7, emissive:0xf97316, emissiveIntensity:0.18 });
+const activeMat = new THREE.MeshStandardMaterial({ color:0xf97316, roughness:0.55, emissive:0xf97316, emissiveIntensity:0.35 });
+
+/* ── Build a zone of buildings ── */
+function makeBuilding(w,h,d){
+  const geo = new RoundedBoxGeometry(w,h,d, 3, Math.min(w,d)*0.16);
+  const m = new THREE.Mesh(geo, baseMat);
+  m.castShadow = true; m.receiveShadow = true;
+  return m;
+}
+const zones = {}; // name -> {group, buildings[], label3d, center}
+function buildZone(name, opts){
+  const g = new THREE.Group();
+  const buildings = [];
+  const { cols, rows, gap, minH, maxH, footprint, center } = opts;
+  for(let i=0;i<cols;i++){
+    for(let j=0;j<rows;j++){
+      // skip some for organic feel
+      if(Math.random()<0.12) continue;
+      const h = minH + Math.random()*(maxH-minH);
+      const w = footprint*(0.7+Math.random()*0.5);
+      const d = footprint*(0.7+Math.random()*0.5);
+      const b = makeBuilding(w,h,d);
+      b.position.set(
+        (i-(cols-1)/2)*gap + (Math.random()-0.5)*gap*0.25,
+        h/2 + 0.8,
+        (j-(rows-1)/2)*gap + (Math.random()-0.5)*gap*0.25
+      );
+      b.userData.zone = name; b.userData.baseY = b.position.y;
+      g.add(b); buildings.push(b);
+    }
+  }
+  g.position.set(center.x, 0, center.z);
+  scene.add(g);
+  zones[name] = { group:g, buildings, center:new THREE.Vector3(center.x,0,center.z) };
+}
+
+/* Three districts: small (front), medium (mid), enterprise (back) */
+buildZone('small',      { cols:5, rows:5, gap:5.2, minH:3,  maxH:7,  footprint:3.0, center:{x:-26, z:26} });
+buildZone('medium',     { cols:4, rows:4, gap:7,   minH:9,  maxH:18, footprint:4.2, center:{x:2,  z:2}  });
+buildZone('enterprise', { cols:3, rows:3, gap:9,   minH:22, maxH:42, footprint:5.4, center:{x:30, z:-24} });
+
+/* ── 3D floating labels (sprites) ── */
+function makeLabel(text, color){
+  const c = document.createElement('canvas'); c.width=512; c.height=128;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = color; ctx.font = '800 64px "Barlow Condensed", sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText(text.toUpperCase(), 256, 64);
+  const tex = new THREE.CanvasTexture(c); tex.anisotropy = 4;
+  const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true, depthTest:false }));
+  spr.scale.set(16,4,1);
+  return spr;
+}
+const labelData = {
+  small:['Small', 10], medium:['Medium', 22], enterprise:['Enterprise', 48]
+};
+Object.entries(labelData).forEach(([k,[txt,y]])=>{
+  const spr = makeLabel(txt, '#f97316');
+  spr.position.set(zones[k].center.x, y, zones[k].center.z);
+  spr.userData.zone = k; scene.add(spr);
+  zones[k].label = spr;
+});
+
+/* ────────────────────────────────────────────────────────────
+   INTERACTION
+──────────────────────────────────────────────────────────── */
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let hovered = null, activeZone = null, isAnimating = false;
+const hoverLabel = document.getElementById('hoverlabel');
+
+function allBuildings(){ return [...zones.small.buildings, ...zones.medium.buildings, ...zones.enterprise.buildings]; }
+
+function setZoneMat(name, mat){ zones[name].buildings.forEach(b=>{ if(!(activeZone && b.userData.zone===activeZone && mat===baseMat && isAnimating)) b.material = mat; }); }
+
+function onPointerMove(e){
+  pointer.x = (e.clientX/innerWidth)*2-1;
+  pointer.y = -(e.clientY/innerHeight)*2+1;
+  if(activeZone || isAnimating){ hoverLabel.style.opacity=0; return; }
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(allBuildings(), false);
+  const zone = hits.length ? hits[0].object.userData.zone : null;
+  if(zone!==hovered){
+    if(hovered){ setZoneMat(hovered, baseMat); gsapZoneLift(hovered,0); }
+    hovered = zone;
+    if(hovered){ setZoneMat(hovered, hoverMat); gsapZoneLift(hovered,1.2); document.body.style.cursor='pointer'; }
+    else document.body.style.cursor='default';
+  }
+  if(hovered){
+    hoverLabel.textContent = CONTENT[hovered].eyebrow;
+    hoverLabel.style.left = e.clientX+'px'; hoverLabel.style.top = e.clientY+'px'; hoverLabel.style.opacity=1;
+  } else hoverLabel.style.opacity=0;
+}
+function gsapZoneLift(name, amt){
+  zones[name].buildings.forEach(b=>gsap.to(b.position,{y:b.userData.baseY+amt,duration:.4,ease:'power2.out'}));
+}
+
+function onClick(e){
+  if(activeZone || isAnimating) return;
+  // Set pointer from the event itself so taps work on touch (no prior hover)
+  pointer.x = (e.clientX/innerWidth)*2-1;
+  pointer.y = -(e.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(allBuildings(), false);
+  if(hits.length) focusZone(hits[0].object.userData.zone);
+}
+
+/* ── Focus a zone: GSAP camera fly + panel ── */
+function focusZone(name){
+  if(isAnimating) return;
+  activeZone = name; isAnimating = true;
+  controls.autoRotate = false; controls.enabled = false;
+  hoverLabel.style.opacity = 0; document.body.style.cursor='default';
+
+  // dim others, highlight selected
+  Object.keys(zones).forEach(z=>{
+    zones[z].buildings.forEach(b=>{ b.material = (z===name)?activeMat:baseMat; });
+    gsap.to(zones[z].label.material,{opacity:(z===name)?1:0.0,duration:.4});
+    gsap.to(zones[z].group.position,{x: z===name? zones[z].center.x : zones[z].center.x + (zones[z].center.x)*0.0, duration:.6});
+  });
+
+  const c = zones[name].center;
+  const camTarget = new THREE.Vector3(c.x, 4, c.z);
+  const offset = { small:[ -10,14,16], medium:[ -12,20,20], enterprise:[ -16,34,26] }[name];
+  const camDest = new THREE.Vector3(c.x+offset[0], offset[1], c.z+offset[2]);
+
+  gsap.to(camera.position,{x:camDest.x,y:camDest.y,z:camDest.z,duration:1.4,ease:'power3.inOut',onUpdate:()=>camera.lookAt(camTarget)});
+  gsap.to(controls.target,{x:camTarget.x,y:camTarget.y,z:camTarget.z,duration:1.4,ease:'power3.inOut',onComplete:()=>{isAnimating=false;}});
+
+  // hide intro, show panel + controls
+  gsap.to('#intro',{opacity:0,y:20,duration:.4,onComplete:()=>document.getElementById('intro').style.display='none'});
+  populatePanel(name);
+  setTimeout(()=>{ document.getElementById('panel').classList.add('open'); document.getElementById('controls').classList.add('show'); }, 500);
+}
+
+function resetView(){
+  if(isAnimating) return; isAnimating = true;
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('controls').classList.remove('show');
+  Object.keys(zones).forEach(z=>{
+    zones[z].buildings.forEach(b=>{ b.material = baseMat; gsap.to(b.position,{y:b.userData.baseY,duration:.5}); });
+    gsap.to(zones[z].label.material,{opacity:1,duration:.5});
+  });
+  gsap.to(camera.position,{x:HOME_POS.x,y:HOME_POS.y,z:HOME_POS.z,duration:1.4,ease:'power3.inOut',onUpdate:()=>camera.lookAt(controls.target)});
+  gsap.to(controls.target,{x:HOME_TGT.x,y:HOME_TGT.y,z:HOME_TGT.z,duration:1.4,ease:'power3.inOut',onComplete:()=>{
+    isAnimating=false; activeZone=null; hovered=null; controls.enabled=true; controls.autoRotate=true;
+  }});
+  const intro = document.getElementById('intro'); intro.style.display='block';
+  gsap.fromTo('#intro',{opacity:0,y:20},{opacity:1,y:0,duration:.5,delay:.6});
+}
+
+/* ── Populate the detail panel ── */
+function populatePanel(name){
+  const d = CONTENT[name];
+  document.getElementById('p-eyebrow').textContent = d.eyebrow;
+  document.getElementById('p-dot').style.background = d.dotColor;
+  document.getElementById('p-title').textContent = d.title;
+  document.getElementById('p-sub').textContent = d.sub;
+  document.getElementById('p-roles').innerHTML = d.roles.map(r=>`<span class="role">${r}</span>`).join('');
+  document.getElementById('p-problem').textContent = d.problem;
+  document.getElementById('p-ladder').innerHTML = d.ladder.map(([lvl,desc])=>`<div class="rung"><span class="lvl">${lvl}</span><span class="d">${desc}</span></div>`).join('');
+  document.getElementById('p-outcome-label').textContent = d.outcomeLabel;
+  document.getElementById('p-outcome').textContent = d.outcome;
+  document.getElementById('p-support').textContent = d.support;
+  // stagger the rungs
+  gsap.fromTo('#p-ladder .rung',{opacity:0,x:30},{opacity:1,x:0,stagger:.08,duration:.5,delay:.6});
+}
+
+/* ── Wire up UI ── */
+renderer.domElement.addEventListener('pointermove', onPointerMove);
+renderer.domElement.addEventListener('click', onClick);
+document.getElementById('resetBtn').addEventListener('click', resetView);
+document.getElementById('closepanel').addEventListener('click', resetView);
+document.querySelectorAll('#intro .pill').forEach(btn=>{
+  btn.addEventListener('click',()=>focusZone(btn.dataset.zone));
+});
+addEventListener('resize',()=>{
+  camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ── Render loop ── */
+function animate(){
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+/* ── Intro reveal ── */
+gsap.to('#loader',{opacity:0,duration:.6,delay:.3,onComplete:()=>document.getElementById('loader').style.display='none'});
+gsap.fromTo('#intro',{opacity:0,y:30},{opacity:1,y:0,duration:.8,delay:.5});
+gsap.fromTo('#brand',{opacity:0,x:-20},{opacity:1,x:0,duration:.8,delay:.7});
+</script>
+</body>
+</html>

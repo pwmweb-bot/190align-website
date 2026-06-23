@@ -107,28 +107,38 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- Hero -->
   <section class="relative overflow-hidden">
     <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80" alt="Team setting goals around a table" class="w-full h-full object-cover opacity-20" />
+      <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&q=80" alt="Team setting goals around a table" class="w-full h-full object-cover opacity-20" loading="eager" />
+      <div class="absolute inset-0 bg-blue-950 opacity-70"></div>
     </div>
-    <div class="relative container mx-auto px-6 py-20">
-      <div class="max-w-3xl mx-auto">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="bg-orange-500 px-3 py-1" style="transform:skewX(-12deg)">
-            <span class="text-blue-950 font-black uppercase text-xs tracking-wider" style="display:inline-block;transform:skewX(12deg)">Goal Setting</span>
-          </div>
-          <span class="text-gray-400 font-bold text-sm uppercase tracking-wider">23 June 2026</span>
+    <div class="relative container mx-auto px-6 py-20 md:py-28">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 mb-8 text-sm font-bold uppercase tracking-wider">
+          <a href="../index.html" class="text-gray-400 hover:text-orange-500 transition-colors">Home</a>
+          <span class="text-gray-600">/</span>
+          <a href="index.html" class="text-gray-400 hover:text-orange-500 transition-colors">Blog</a>
+          <span class="text-gray-600">/</span>
+          <span class="text-orange-500">Goal Setting</span>
         </div>
-        <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none mb-6">
+        <!-- Category tag -->
+        <div class="inline-block mb-6" style="transform:skewX(-12deg)">
+          <span class="bg-orange-500 text-blue-950 font-black uppercase tracking-wider text-xs px-4 py-2 block" style="display:inline-block;transform:skewX(12deg)">Goal Setting</span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight leading-none text-white mb-6">
           SMART Goals: Definitions, Examples &amp; a Better Way to Use Them
         </h1>
-        <p class="text-xl text-gray-300 font-normal leading-relaxed max-w-2xl">
-          SMART goals are the most widely taught goal-setting method in business. Here is what each letter of the SMART acronym actually means, real examples you can copy, a free template — and the one thing SMART goals never tell you, which is usually why they fail.
-        </p>
+        <div class="flex flex-wrap items-center gap-6 text-gray-400 text-sm font-bold uppercase tracking-wider">
+          <span>By Phil Martin</span>
+          <span class="text-gray-600">|</span>
+          <time datetime="2026-06-23">23 June 2026</time>
+          <span class="text-gray-600">|</span>
+          <span>7 min read</span>
+        </div>
       </div>
     </div>
-    <div class="absolute bottom-0 left-0 right-0 h-1 bg-orange-500"></div>
   </section>
 
   <!-- ARTICLE BODY -->

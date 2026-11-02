@@ -1,0 +1,41 @@
+# Internal files that must not be served from Vercel deployments.
+# 20i (Apache) ignores this file.
+
+# Deploy tooling and docs
+DEPLOY.md
+deploy.sh
+*.sh
+*.md
+README*
+CHANGELOG*
+
+# Repo and editor config
+.github/
+.claude/
+.gitignore
+.vercelignore
+.htaccess
+.env
+.env.*
+.DS_Store
+
+# Internal strategy and source material
+content-strategy/
+.strategy/
+guides-src/
+seo-audit/
+
+# Server-side code that does not run on Vercel
+*.php
+
+# Backups, logs and scratch files
+*.bak
+*.old
+*.orig
+*.save
+*.swp
+*.swo
+*.log
+*.sql
+*.zip
+node_modules/
